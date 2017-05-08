@@ -9,7 +9,7 @@
         android:layout_height="67dp"
         android:background="@color/colorPrimary">
         <TextView
-            android:text="About app"
+            android:text="@string/about_app"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>
@@ -20,7 +20,7 @@
         android:layout_height="67dp"
         android:layout_below="@id/trAbout">
         <TextView
-            android:text="Help and FAQ"
+            android:text="@string/help"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>
@@ -31,7 +31,7 @@
         android:layout_height="67dp"
         android:layout_below="@id/trHelpFAQ">
         <TextView
-            android:text="Terms and Conditions"
+            android:text="@string/terms_conditions"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>
@@ -43,7 +43,7 @@
         android:background="@color/colorPrimary"
         android:layout_below="@id/trTermsConditions">
         <TextView
-            android:text="Feedback"
+            android:text="@string/feedback"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>
@@ -54,7 +54,7 @@
         android:layout_height="67dp"
         android:layout_below="@id/trFeedback">
         <TextView
-            android:text="Send email"
+            android:text="@string/email"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>
@@ -65,7 +65,7 @@
         android:layout_height="67dp"
         android:layout_below="@id/trEmail">
         <TextView
-            android:text="Recommend to Friends"
+            android:text="@string/recommend_friends"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>

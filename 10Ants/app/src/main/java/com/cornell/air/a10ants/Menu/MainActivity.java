@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.cornell.air.a10ants.Fragments.AboutFragment;
+import com.cornell.air.a10ants.Fragments.ChatFragment;
 import com.cornell.air.a10ants.Fragments.OverviewFragment;
+import com.cornell.air.a10ants.Fragments.ReminderFragment;
+import com.cornell.air.a10ants.Fragments.ReportFragment;
 import com.cornell.air.a10ants.R;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarBadge;
@@ -25,13 +28,30 @@ public class MainActivity extends AppCompatActivity {
         mBottomBar.setItemsFromMenu(R.menu.menu_main, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
+                //Redirects to Overview menu
                 if (menuItemId == R.id.menuOverview) {
                     OverviewFragment o = new OverviewFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, o).commit();
                 }
-                else if (menuItemId == R.id.menuAbout) {
+                //Redirects to About menu
+                else if (menuItemId == R.id.menuChat) {
                     AboutFragment a = new AboutFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, a).commit();
+                }
+                //Redirects to Chat menu
+                else if (menuItemId == R.id.menuAbout) {
+                    ChatFragment c = new ChatFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.frame, c).commit();
+                }
+                //Redirects to Report menu
+                else if (menuItemId == R.id.menuReport) {
+                    ReportFragment rep = new ReportFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
+                }
+                //Redirects to Reminder menu
+                else if (menuItemId == R.id.menuReminder) {
+                    ReminderFragment rem = new ReminderFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.frame, rem).commit();
                 }
             }
 

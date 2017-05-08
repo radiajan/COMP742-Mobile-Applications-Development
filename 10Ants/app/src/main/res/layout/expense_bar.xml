@@ -28,7 +28,7 @@
             android:textColor="@color/white"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:text="Expenses"
+            android:text="@string/expenses"
             android:textAllCaps="true" />
     </LinearLayout>
 </android.support.v7.widget.Toolbar>
