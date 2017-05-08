@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">10Ants</string>
+    <string name="tenants">Tenants</string>
+    <string name="expenses">Expenses</string>
 </resources>
