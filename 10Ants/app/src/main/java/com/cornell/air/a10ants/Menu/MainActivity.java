@@ -4,6 +4,7 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.cornell.air.a10ants.Fragments.AboutFragment;
 import com.cornell.air.a10ants.Fragments.OverviewFragment;
 import com.cornell.air.a10ants.R;
 import com.roughike.bottombar.BottomBar;
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItemId == R.id.menuOverview) {
                     OverviewFragment o = new OverviewFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, o).commit();
+                }
+                else if (menuItemId == R.id.menuAbout) {
+                    AboutFragment a = new AboutFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.frame, a).commit();
                 }
             }
 

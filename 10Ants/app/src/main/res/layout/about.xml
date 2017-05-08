@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:id="@+id/trAbout"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:text="About app"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trHelpFAQ"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@id/trAbout">
+        <TextView
+            android:text="Help and FAQ"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trTermsConditions"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@id/trHelpFAQ">
+        <TextView
+            android:text="Terms and Conditions"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:background="@color/colorPrimary"
+        android:layout_below="@id/trTermsConditions">
+        <TextView
+            android:text="Feedback"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trEmail"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@id/trFeedback">
+        <TextView
+            android:text="Send email"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trRecommend"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@id/trEmail">
+        <TextView
+            android:text="Recommend to Friends"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+</RelativeLayout>

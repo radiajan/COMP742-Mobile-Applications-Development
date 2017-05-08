@@ -3,7 +3,12 @@ package com.cornell.air.a10ants.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,35 +32,12 @@ public class OverviewFragment extends Fragment {
     String[] NAMES = {"image1", "image2", "image3", "image4"};
     String[] DESCRIPTION = {"house", "house", "apartment", "apartment"};
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.overview, container, false);
 
-        //Finds the control in the View
-        ListView listViewProperty = (ListView) view.findViewById(R.id.listViewProperty);
-
-        //Instance of Adapter class
-        CustomAdapter customAdapter = new CustomAdapter();
-
-        //Executes the adapter to create the list
-        listViewProperty.setAdapter(customAdapter);
-
-        //Adds OnClick event
-        listViewProperty.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Property prop = new Property();
-                Intent intent = new Intent(view.getContext(), PropertyDetails.class);
-
-                prop.setName("Name");
-                prop.setAddress("8 Airedale Street");
-                prop.setDescription("This is a description");
-
-                intent.putExtra("Property", prop);
-                startActivity(intent);
-            }
-        });
+        //Populate and add event to ListView
+        startListView(view);
 
         //Create tabs for the Overview
         CreateTab(view);
@@ -64,6 +46,7 @@ public class OverviewFragment extends Fragment {
         return view;
     }
 
+    //Create Tab name
     private void CreateTab(View view){
         TabHost tabs = (TabHost)view.findViewById(R.id.tabOverview);
         tabs.setup();
@@ -81,6 +64,49 @@ public class OverviewFragment extends Fragment {
         tabs.addTab(tenantTab);
     }
 
+    //Start ListView Event
+    private void startListView(View view)
+    {
+        //Finds the control in the View
+        ListView listViewPropertyLandlord = (ListView) view.findViewById(R.id.listViewPropertyLandlord);
+
+        //Instance of Adapter class
+        CustomAdapter customAdapter = new CustomAdapter();
+
+        //Executes the adapter to create the list
+        listViewPropertyLandlord.setAdapter(customAdapter);
+
+        //Adds OnClick event
+        listViewPropertyLandlord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Property prop = new Property();
+                Intent intent = new Intent(view.getContext(), PropertyDetails.class);
+
+                prop.setName("Name");
+                prop.setAddress("8 Airedale Street");
+                prop.setDescription("This is a description");
+
+                intent.putExtra("Property", prop);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuAdd:
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 
     class CustomAdapter extends BaseAdapter {
         @Override
