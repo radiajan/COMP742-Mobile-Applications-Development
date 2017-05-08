@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TableRow
+        android:id="@+id/trName"
+        android:layout_width="match_parent"
+        android:layout_height="67dp">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/name" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="67dp"
+            android:layout_weight="4.01"
+            android:text="TextView" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trAddress"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/trName">
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/address" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.01"
+            android:text="TextView" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/trAddress">
+
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/description" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.01"
+            android:text="TextView" />
+    </TableRow>
+
+</RelativeLayout>

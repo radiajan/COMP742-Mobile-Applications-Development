@@ -1,5 +1,6 @@
 package com.cornell.air.a10ants.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cornell.air.a10ants.R;
@@ -62,11 +64,13 @@ public class PropertyDetails extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
 
         // Set onClickListener to customView
-        TextView tvSave = (TextView) findViewById(R.id.menuAdd);
-        tvSave.setOnClickListener(new View.OnClickListener() {
+        ImageView imgAdd = (ImageView) findViewById(R.id.menuAdd);
+        imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO
+                Intent intent = new Intent(v.getContext(), AddExpense.class);
+                startActivity(intent);
             }
         });
     }

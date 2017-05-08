@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableRow
+        android:id="@+id/trInfo"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:text="Tenant information"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trName"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/trInfo">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/name" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="67dp"
+            android:layout_weight="4.01"
+            android:text="TextView" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trEmail"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/trName">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/email" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.01"
+            android:text="TextView" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trPhone"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/trEmail">
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/phone" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.01"
+            android:text="TextView" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trDateofBirth"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/trPhone">
+
+        <EditText
+            android:id="@+id/etDateofBirth"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/date_of_birth" />
+
+        <TextView
+            android:id="@+id/tvDateofBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.01"
+            android:text="TextView" />
+    </TableRow>
+</RelativeLayout>

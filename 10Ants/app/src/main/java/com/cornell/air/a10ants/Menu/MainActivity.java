@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
                     getFragmentManager().beginTransaction().replace(R.id.frame, o).commit();
                 }
                 //Redirects to About menu
-                else if (menuItemId == R.id.menuChat) {
+                else if (menuItemId == R.id.menuAbout) {
                     AboutFragment a = new AboutFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, a).commit();
                 }
                 //Redirects to Chat menu
-                else if (menuItemId == R.id.menuAbout) {
+                else if (menuItemId == R.id.menuChat) {
                     ChatFragment c = new ChatFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, c).commit();
                 }
