@@ -3,12 +3,12 @@
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent" android:layout_height="match_parent"
-android:background="@color/colorgray"
+android:background="@color/colorGray"
 android:padding="16dp"
-tools:context="com.mobilelab.splashscreen.HomeActivity">
+tools:context="com.cornell.air.a10ants.View.Login">
 
 <ImageView
-    android:id="@+id/imageView2"
+    android:id="@+id/logo"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
@@ -17,7 +17,7 @@ tools:context="com.mobilelab.splashscreen.HomeActivity">
 
 
 <Button
-    android:id="@+id/bgoogle"
+    android:id="@+id/btnGoogle"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
@@ -26,12 +26,13 @@ tools:context="com.mobilelab.splashscreen.HomeActivity">
     android:drawableLeft="@drawable/g"
     android:textSize="20sp"
     android:layout_marginTop="129dp"
-    android:layout_below="@+id/imageView2"
+    android:layout_below="@+id/logo"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true" />
+    android:layout_alignParentStart="true"
+    android:onClick="loginGoogle"/>
 
 <Button
-    android:id="@+id/bfacebook"
+    android:id="@+id/btnFacebook"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
@@ -40,7 +41,7 @@ tools:context="com.mobilelab.splashscreen.HomeActivity">
     android:drawableLeft="@drawable/f"
     android:textSize="20sp"
     android:layout_marginTop="20dp"
-    android:layout_below="@+id/bgoogle"
+    android:layout_below="@+id/btnGoogle"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true" />
 

@@ -8,8 +8,8 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:background="@color/colorgray"
-    tools:context="com.mobilelab.splashscreen.HomeActivity">
+    android:background="@color/colorGray"
+    tools:context="com.cornell.air.a10ants.View.Login">
 
 
     <ProgressBar
