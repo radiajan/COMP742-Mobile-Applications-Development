@@ -17,9 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".View.PropertyDetails"></activity>
-        <activity android:name=".Menu.MainActivity"></activity>
+        <activity android:name=".Menu.MenuFrame"></activity>
     </application>
 
 </manifest>

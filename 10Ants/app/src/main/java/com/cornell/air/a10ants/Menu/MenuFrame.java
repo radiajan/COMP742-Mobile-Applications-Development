@@ -14,14 +14,14 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarBadge;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MenuFrame extends AppCompatActivity {
 
     BottomBar mBottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.menu_frame);
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
         mBottomBar.setItemsFromMenu(R.menu.menu_main, new OnMenuTabClickListener() {
@@ -32,26 +32,26 @@ public class MainActivity extends AppCompatActivity {
                     OverviewFragment o = new OverviewFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, o).commit();
                 }
-                //Redirects to About menu
-                else if (menuItemId == R.id.menuAbout) {
-                    AboutFragment a = new AboutFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.frame, a).commit();
+                //Redirects to Report menu
+                else if (menuItemId == R.id.menuReport) {
+                    ReportFragment rep = new ReportFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
                 }
                 //Redirects to Chat menu
                 else if (menuItemId == R.id.menuChat) {
                     ChatFragment c = new ChatFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, c).commit();
                 }
-                //Redirects to Report menu
-                else if (menuItemId == R.id.menuReport) {
-                    ReportFragment rep = new ReportFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
+                //Redirects to About menu
+                else if (menuItemId == R.id.menuAbout) {
+                    AboutFragment a = new AboutFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.frame, a).commit();
                 }
                 //Redirects to Reminder menu
-                else if (menuItemId == R.id.menuReminder) {
+                /*else if (menuItemId == R.id.menuReminder) {
                     ReminderFragment rem = new ReminderFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, rem).commit();
-                }
+                }*/
             }
 
             @Override
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         mBottomBar.mapColorForTab(4, "#FF6F00");*/
 
         BottomBarBadge unread;
-        unread = mBottomBar.makeBadgeForTabAt(3,"#FF0000",5);
+        unread = mBottomBar.makeBadgeForTabAt(2,"#FF0000",5);
         unread.show();
     }
 

@@ -3,10 +3,9 @@ package com.cornell.air.a10ants.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.cornell.air.a10ants.Menu.MainActivity;
+import com.cornell.air.a10ants.Menu.MenuFrame;
 import com.cornell.air.a10ants.R;
 
 /**
@@ -21,7 +20,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginGoogle(View view){
-        Intent intent = new Intent(view.getContext(), MainActivity.class);
+        Intent intent = new Intent(view.getContext(), MenuFrame.class);
         startActivity(intent);
     }
 

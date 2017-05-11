@@ -5,10 +5,12 @@
         android:title="Overview">
     </item>
 
+    <!--
     <item android:id="@+id/menuReminder"
         android:icon="@drawable/ic_access_reminder_black_24dp"
         android:title="Reminder">
     </item>
+    -->
 
     <item android:id="@+id/menuReport"
         android:icon="@drawable/ic_report_black_24dp"
