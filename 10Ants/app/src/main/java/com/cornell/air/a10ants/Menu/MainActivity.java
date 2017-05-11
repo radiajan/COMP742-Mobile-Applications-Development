@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
         mBottomBar.setItemsFromMenu(R.menu.menu_main, new OnMenuTabClickListener() {
@@ -63,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mBottomBar.mapColorForTab(0, "#F44336");
+/*      mBottomBar.mapColorForTab(0, "#F44336");
         mBottomBar.mapColorForTab(1, "#9C27B0");
         mBottomBar.mapColorForTab(2, "#03A9F4");
         mBottomBar.mapColorForTab(3, "#79554B");
-        mBottomBar.mapColorForTab(4, "#FF6F00");
+        mBottomBar.mapColorForTab(4, "#FF6F00");*/
 
         BottomBarBadge unread;
         unread = mBottomBar.makeBadgeForTabAt(3,"#FF0000",5);
