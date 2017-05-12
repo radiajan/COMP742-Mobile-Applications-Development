@@ -27,7 +27,6 @@
                 android:layout_toEndOf="@+id/tbrTenant" />
     </ScrollView>
 
-
     <include
         android:id="@+id/tbrExpense"
         layout="@layout/custom_bar_expense"
@@ -51,13 +50,4 @@
                 android:layout_below="@+id/tbrExpense"
                 android:layout_toEndOf="@+id/tbrExpense" />
     </ScrollView>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/svTenant"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="131dp"
-        android:text="" />
 </RelativeLayout>
