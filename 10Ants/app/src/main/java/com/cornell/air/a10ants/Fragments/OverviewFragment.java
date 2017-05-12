@@ -3,11 +3,7 @@ package com.cornell.air.a10ants.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,7 +122,7 @@ public class OverviewFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup){
-            view = getActivity().getLayoutInflater().inflate(R.layout.custom_list_view, null);
+            view = getActivity().getLayoutInflater().inflate(R.layout.custom_list_property, null);
 
             ImageView propImage = (ImageView) view.findViewById(R.id.propImage);
             TextView tvName = (TextView) view.findViewById(R.id.tvName);
