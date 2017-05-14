@@ -1,29 +1,67 @@
 package com.cornell.air.a10ants.Menu;
 
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.cornell.air.a10ants.Fragments.AboutFragment;
 import com.cornell.air.a10ants.Fragments.ChatFragment;
 import com.cornell.air.a10ants.Fragments.OverviewFragment;
-import com.cornell.air.a10ants.Fragments.ReminderFragment;
 import com.cornell.air.a10ants.Fragments.ReportFragment;
 import com.cornell.air.a10ants.R;
+import com.cornell.air.a10ants.View.Login;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarBadge;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
 public class MenuFrame extends AppCompatActivity {
 
+    //FIREBASE instance variables
+    public static final String ANONYMOUS = "anonymous";
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private String mUsername;
+    private String mPhotoUrl;
+
+    //BOTTOMBAR instance variables
     BottomBar mBottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_frame);
+        setContentView(R.layout.container_menu);
+
+        //Initialize Auth
+        InitializeFirebaseAuthentication();
+
+        //Attach context to Bottombar
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
+        //Create the BottomBar menu items
+        setItemsFromMenu();
+
+        //Adds badge to Bottombar menu item
+        BottomBarBadge unread;
+        unread = mBottomBar.makeBadgeForTabAt(2,"#FF0000",5);
+        unread.show();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save the menu bottom bar state
+        mBottomBar.onSaveInstanceState(outState);
+    }
+
+    /**
+     * Create menu items in the Bottombar component
+     */
+    private void setItemsFromMenu(){
         mBottomBar.setItemsFromMenu(R.menu.menu_main, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
@@ -61,23 +99,31 @@ public class MenuFrame extends AppCompatActivity {
                 }
             }
         });
-
-/*      mBottomBar.mapColorForTab(0, "#F44336");
-        mBottomBar.mapColorForTab(1, "#9C27B0");
-        mBottomBar.mapColorForTab(2, "#03A9F4");
-        mBottomBar.mapColorForTab(3, "#79554B");
-        mBottomBar.mapColorForTab(4, "#FF6F00");*/
-
-        BottomBarBadge unread;
-        unread = mBottomBar.makeBadgeForTabAt(2,"#FF0000",5);
-        unread.show();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    /**
+     * Initialize fire base authentication components
+     */
+    private void InitializeFirebaseAuthentication(){
+        mUsername = ANONYMOUS;
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        if(mFirebaseUser == null)
+        {
+            //Not Signed in, launch the Sign In Activity
+            startActivity(new Intent(this, Login.class));
+            finish();
+            return;
+        }
+        else{
+            //Set name to variable
+            mUsername = mFirebaseUser.getDisplayName();
 
-        //Save the menu bottom bar state
-        mBottomBar.onSaveInstanceState(outState);
+            //Set photo to variable
+            if(mFirebaseUser.getPhotoUrl() != null){
+                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+            }
+            Log.i("User name: ", mUsername);
+        }
     }
 }

@@ -9,20 +9,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.cornell.air.a10ants.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -74,7 +67,6 @@ public class PropertyDetails extends AppCompatActivity {
 
         final ArrayAdapter adapterExpense = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listExpense);
         lvExpense.setAdapter(adapterExpense);
-
     }
 
     @Override
@@ -95,7 +87,6 @@ public class PropertyDetails extends AppCompatActivity {
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
@@ -115,7 +106,7 @@ public class PropertyDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO
-                Intent intent = new Intent(v.getContext(), Expense.class);
+                Intent intent = new Intent(v.getContext(), addExpense.class);
                 startActivity(intent);
             }
         });

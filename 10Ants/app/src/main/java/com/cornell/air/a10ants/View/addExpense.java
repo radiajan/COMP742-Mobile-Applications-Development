@@ -10,10 +10,10 @@ import com.cornell.air.a10ants.R;
  * Created by root on 8/05/17.
  */
 
-public class Property extends AppCompatActivity {
+public class addExpense extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_property);
+        setContentView(R.layout.add_expenses);
     }
 }

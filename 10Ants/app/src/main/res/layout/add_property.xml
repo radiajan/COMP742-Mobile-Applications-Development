@@ -3,9 +3,21 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TableRow
+        android:id="@+id/trInfo"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:text="@string/information_property"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"/>
+    </TableRow>
+
+    <TableRow
         android:id="@+id/trName"
         android:layout_width="match_parent"
-        android:layout_height="67dp">
+        android:layout_height="67dp"
+        android:layout_below="@+id/trInfo">
 
         <EditText
             android:id="@+id/etName"
@@ -19,8 +31,7 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="67dp"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:layout_weight="4.01"/>
     </TableRow>
 
     <TableRow
@@ -41,14 +52,13 @@
             android:id="@+id/tvAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:layout_weight="4.01"/>
     </TableRow>
 
     <TableRow
         android:id="@+id/trDescription"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="67dp"
         android:layout_below="@+id/trAddress">
 
         <EditText
@@ -63,8 +73,16 @@
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:layout_weight="4.01" />
     </TableRow>
+
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_property"
+        android:layout_below="@+id/trDescription"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

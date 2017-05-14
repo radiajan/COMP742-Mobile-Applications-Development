@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
-
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.R;
 import com.cornell.air.a10ants.View.PropertyDetails;
@@ -30,7 +29,7 @@ public class OverviewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.overview, container, false);
+        View view = inflater.inflate(R.layout.f_overview, container, false);
 
         //Populate and add event to ListView
         startListView(view);
@@ -56,7 +55,7 @@ public class OverviewFragment extends Fragment {
         //Create a tab for Tenants
         TabHost.TabSpec tenantTab = tabs.newTabSpec("tabTenant");
         tenantTab.setContent(R.id.tabTenant);
-        tenantTab.setIndicator("Tenant");
+        tenantTab.setIndicator("addTenant");
         tabs.addTab(tenantTab);
     }
 
@@ -83,7 +82,7 @@ public class OverviewFragment extends Fragment {
                 prop.setAddress("8 Airedale Street");
                 prop.setDescription("This is a description");
 
-                intent.putExtra("Property", prop);
+                intent.putExtra("addProperty", prop);
                 startActivity(intent);
             }
         });

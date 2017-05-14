@@ -218,7 +218,7 @@
     </ScrollView>
 
     <include
-        layout="@layout/type_message_area"
+        layout="@layout/container_type_message_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"

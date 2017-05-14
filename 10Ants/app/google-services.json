@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "268147329352",
+    "firebase_url": "https://ants-c7505.firebaseio.com",
+    "project_id": "ants-c7505",
+    "storage_bucket": "ants-c7505.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268147329352:android:1f8d1f83c83aa89d",
+        "android_client_info": {
+          "package_name": "com.cornell.air.a10ants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268147329352-621h2vbmbt8dddedf88iujgqiaqgj56c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cornell.air.a10ants",
+            "certificate_hash": "2df90d6b58a3a6186dee493cf03ff893abae3921"
+          }
+        },
+        {
+          "client_id": "268147329352-ehvh8oq0unhjeo4j07lat593q08ahjp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUvxbfPD_cbD28mIRRilG3wYPek2Fs4gE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268147329352-ehvh8oq0unhjeo4j07lat593q08ahjp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

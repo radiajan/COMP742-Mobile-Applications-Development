@@ -8,7 +8,7 @@
         android:layout_height="67dp"
         android:background="@color/colorPrimary">
         <TextView
-            android:text="Expenses for..."
+            android:text="@string/information_expense"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>

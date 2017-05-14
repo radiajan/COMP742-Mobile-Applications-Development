@@ -15,7 +15,7 @@ import com.cornell.air.a10ants.R;
 public class ChatFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.activity_chat, container, false);
+        View view = inflater.inflate(R.layout.f_chat, container, false);
 
         //Return View to be injected
         return view;

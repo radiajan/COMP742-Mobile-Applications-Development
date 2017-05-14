@@ -21,4 +21,8 @@
     <string name="receipt">RECEIPT</string>
     <string name="expense">EXPENSES</string>
     <string name="report">REPORT</string>
+    <string name="information_property">Property Information</string>
+    <string name="information_tenant">Tenant Information</string>
+    <string name="information_expense">Expense Information</string>
+    <string name="add_property">Add Property</string>
 </resources>
