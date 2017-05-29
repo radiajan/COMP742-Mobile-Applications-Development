@@ -1,25 +1,41 @@
 package com.cornell.air.a10ants.DAL;
 
+import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.PropertyList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by massami on 29/05/2017.
  */
 
 public class PropertyDAL {
-    //Reference to the expense database
+    //Instance
     DatabaseReference database;
+    List<Property> listProperty;
+    Activity activityProperty;
 
     public PropertyDAL(){
         //Create instance of the property node
         database = FirebaseDatabase.getInstance().getReference("properties");
+    }
+
+    public PropertyDAL(Activity activity){
+        database = FirebaseDatabase.getInstance().getReference("properties");
+        this.activityProperty = activity;
     }
 
     /**

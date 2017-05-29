@@ -47,7 +47,7 @@ public class addProperty extends AppCompatActivity{
         property.setName(((EditText)findViewById(R.id.etName)).getText().toString());
         property.setAddress(((EditText)findViewById(R.id.etAddress)).getText().toString());
         property.setDescription(((EditText)findViewById(R.id.etDescription)).getText().toString());
-        property.setType(((Spinner)findViewById(R.id.spType)).getSelectedItem().toString());
+        property.setType(((Spinn    er)findViewById(R.id.spType)).getSelectedItem().toString());
 
         //Create the instance of the DAO object
         propertyDAL = new PropertyDAL();

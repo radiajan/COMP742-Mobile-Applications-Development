@@ -1,5 +1,6 @@
 package com.cornell.air.a10ants.View;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +10,27 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
+import com.cornell.air.a10ants.DAL.ExpenseDAL;
+import com.cornell.air.a10ants.DAL.PropertyDAL;
+import com.cornell.air.a10ants.Model.Expense;
+import com.cornell.air.a10ants.Model.ExpenseList;
+import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.PropertyList;
+import com.cornell.air.a10ants.Model.Tenant;
+import com.cornell.air.a10ants.Model.TenantList;
 import com.cornell.air.a10ants.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +42,15 @@ import java.util.List;
 
 public class PropertyDetails extends AppCompatActivity {
 
-    private ArrayList<String> arrayList;
-    private ArrayAdapter<String> adapter;
+    //Instance
+    DatabaseReference databaseExpense;
+    DatabaseReference databaseTenant;
+    List<Expense> listExpense;
+    List<Tenant> listTenant;
+    ListView lvTenant;
+    ListView lvExpense;
+    Tenant tenant;
+    Expense expense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +61,14 @@ public class PropertyDetails extends AppCompatActivity {
         Intent intent = getIntent();
         final String propertyId = intent.getStringExtra("propertyId");
         final String propertyName = intent.getStringExtra("propertyName");
+
+        //Get the database reference
+        databaseExpense = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+        databaseTenant = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
+
+        //Instantiate list
+        listExpense = new ArrayList<>();
+        listTenant = new ArrayList<>();
 
         //Create the event to redirect to ADD EXPENSE layout
         Button btnAddExpense = (Button) findViewById(R.id.btnAddExpense);
@@ -67,76 +97,118 @@ public class PropertyDetails extends AppCompatActivity {
         });
 
         //Finds ListView in layout
-        ListView lvTenant = (ListView) findViewById(R.id.lvTenant);
-        ListView lvExpense = (ListView) findViewById(R.id.lvExpense);
+        lvTenant = (ListView) findViewById(R.id.lvTenant);
+        lvExpense = (ListView) findViewById(R.id.lvExpense);
 
-        //Dummy values for name
-        String[] tenant = new String[] { "Rodrigo", "Rafael", "Anna"};
-        final ArrayList<String> listTenant = new ArrayList<String>();
+        //Create popup menu
+        lvTenant.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int pos, long id) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(PropertyDetails.this, lvTenant);
 
-        for (int i = 0; i < tenant.length; ++i) {
-            listTenant.add(tenant[i]);
-        }
+                //Get the selected property
+                tenant = listTenant.get(pos);
 
-        final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, listTenant);
-        lvTenant.setAdapter(adapter);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
 
-
-        //Dummy values for expenses
-        String[] expense = new String[] { "Water/Gas $100", "Electricity $50", "Internet $85"};
-        final ArrayList<String> listExpense = new ArrayList<String>();
-
-        for (int i = 0; i < expense.length; ++i) {
-            listExpense.add(expense[i]);
-        }
-
-        final ArrayAdapter adapterExpense = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listExpense);
-        lvExpense.setAdapter(adapterExpense);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_toolbar, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuAdd:
-                // User chose the "Settings" item, show the app settings UI...
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        //Delete selected item
+                        if(item.getTitle().equals("Delete")) {
+                            databaseTenant.child(tenant.getId()).removeValue();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();//showing popup menu
                 return true;
+            }
+        });
 
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-        }
+        //Create popup menu
+        lvExpense.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int pos, long id) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(PropertyDetails.this, lvExpense);
+
+                //Get the selected property
+                expense = listExpense.get(pos);
+
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        //Delete selected item
+                        if(item.getTitle().equals("Delete")) {
+                            databaseExpense.child(expense.getId()).removeValue();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();//showing popup menu
+                return true;
+            }
+        });
     }
 
-    private class StableArrayAdapter extends ArrayAdapter<String> {
+    /**
+     * Loads the list of the tenant and the landlord
+     */
+    @Override
+    public void onStart()
+    {
+        super.onStart();
 
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+        //Fetch data for the expenses
+        databaseExpense.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Clears previous data
+                listExpense.clear();
 
-        public StableArrayAdapter(Context context, int textViewResourceId,
-                                  List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
+                //Add property to the list
+                for (DataSnapshot expenseSnapshot : dataSnapshot.getChildren()){
+                    Expense expense = expenseSnapshot.getValue(Expense.class);
+                    listExpense.add(expense);
+                }
+
+                ExpenseList adapter = new ExpenseList(PropertyDetails.this, listExpense);
+                lvExpense.setAdapter(adapter);
             }
-        }
 
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
+            }
+        });
 
+        //Fetch data for the tenants
+        databaseTenant.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Clears previous data
+                listTenant.clear();
+
+                //Add property to the list
+                for (DataSnapshot tenantSnapshot : dataSnapshot.getChildren()){
+                    Tenant tenant = tenantSnapshot.getValue(Tenant.class);
+                    listTenant.add(tenant);
+                }
+
+                TenantList adapter = new TenantList(PropertyDetails.this, listTenant);
+                lvTenant.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

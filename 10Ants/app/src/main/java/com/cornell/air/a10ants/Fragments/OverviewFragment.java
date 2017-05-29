@@ -13,8 +13,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.PropertyList;
 import com.cornell.air.a10ants.R;
@@ -35,14 +39,11 @@ import java.util.List;
 
 public class OverviewFragment extends Fragment {
 
-    int[] IMAGES = {R.drawable.images, R.drawable.images2, R.drawable.images3, R.drawable.images4};
-    String[] NAMES = {"image1", "image2", "image3", "image4"};
-    String[] DESCRIPTION = {"house", "house", "apartment", "apartment"};
-
     //Reference to the property database
     DatabaseReference databaseProperty;
     ListView listViewPropertyLandlord;
     List<Property> listProperty;
+    Property property;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
@@ -83,8 +84,34 @@ public class OverviewFragment extends Fragment {
             }
         });
 
-        //Populate and add event to ListView to landlord
-        startListViewTenant(view);
+        //Create popup menu
+        listViewPropertyLandlord.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int pos, long id) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(getActivity(), listViewPropertyLandlord);
+
+                //Get the selected property
+                property = listProperty.get(pos);
+
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        //Delete selected item
+                        if(item.getTitle().equals("Delete")) {
+                            databaseProperty.child(property.getId()).removeValue();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();//showing popup menu
+                return true;
+            }
+        });
+
 
         //Create tabs for the Overview
         CreateTab(view);
@@ -111,49 +138,6 @@ public class OverviewFragment extends Fragment {
         tabs.addTab(tenantTab);
     }
 
-    //Start ListView Event to Landlords
-    private void startListViewLandlord(View view, List<Property> listProperty)
-    {
-       /* //Finds the control in the View
-        ListView listViewPropertyLandlord = (ListView) view.findViewById(R.id.listViewPropertyLandlord);
-
-        //Adds OnClick event
-        listViewPropertyLandlord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Property property = listProperty.get(position);
-
-                Intent intent = new Intent(view.getContext(), PropertyDetails.class);
-
-                startActivity(intent);
-            }
-        });*/
-    }
-
-    //Start ListView Event to Tenants
-    private void startListViewTenant(View view)
-    {
-        //Finds the control in the View
-        ListView listViewPropertyLandlord = (ListView) view.findViewById(R.id.listViewPropertyTenant);
-
-        //Instance of Adapter class
-        CustomAdapter customAdapter = new CustomAdapter();
-
-        //Executes the adapter to create the list
-        listViewPropertyLandlord.setAdapter(customAdapter);
-
-        //Adds OnClick event
-        listViewPropertyLandlord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Property prop = new Property();
-                Intent intent = new Intent(view.getContext(), PropertyDetails.class);
-
-                startActivity(intent);
-            }
-        });
-    }
-
     /**
      * Loads the list of the tenant and the landlord
      */
@@ -166,7 +150,7 @@ public class OverviewFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Clears previous data
-                listProperty.clear();
+                listProperty = new ArrayList<>();;
 
                 //Add property to the list
                 for (DataSnapshot propertySnapshot : dataSnapshot.getChildren()){
@@ -184,53 +168,5 @@ public class OverviewFragment extends Fragment {
 
             }
         });
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuAdd:
-                // User chose the "Settings" item, show the app settings UI...
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
-    class CustomAdapter extends BaseAdapter {
-        @Override
-        public int getCount(){
-            return IMAGES.length;
-        }
-
-        @Override
-        public Object getItem(int i){
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i){
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup){
-            view = getActivity().getLayoutInflater().inflate(R.layout.custom_list_property, null);
-
-            ImageView propImage = (ImageView) view.findViewById(R.id.propImage);
-            TextView tvName = (TextView) view.findViewById(R.id.tvName);
-            TextView tvDescription = (TextView) view.findViewById(R.id.tvDescription);
-
-            propImage.setImageResource(IMAGES[i]);
-            tvName.setText(NAMES[i]);
-            tvDescription.setText(DESCRIPTION[i]);
-
-            return view;
-        }
     }
 }

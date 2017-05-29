@@ -32,13 +32,13 @@ public class TenantList extends ArrayAdapter<Tenant> {
     {
         LayoutInflater inflater = context.getLayoutInflater();
 
-        View ListViewItem = inflater.inflate(R.layout.custom_list_expense, null, true);
+        View ListViewItem = inflater.inflate(R.layout.custom_list_tenant, null, true);
 
         TextView tvName = (TextView) ListViewItem.findViewById(R.id.tvName);
 
         Tenant tenant = tenantList.get(position);
 
-        tvName.setText(tenant.getProperty());
+        tvName.setText(tenant.getName());
 
         return ListViewItem;
     }

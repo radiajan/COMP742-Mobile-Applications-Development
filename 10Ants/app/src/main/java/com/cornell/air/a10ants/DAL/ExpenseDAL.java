@@ -4,8 +4,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.cornell.air.a10ants.Model.Expense;
+import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.PropertyList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 /**
  * Created by massami on 29/05/2017.

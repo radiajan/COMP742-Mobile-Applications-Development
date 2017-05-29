@@ -35,4 +35,13 @@
         <item>House</item>
         <item>Apartment</item>
     </array>
+
+    <array name="expense_type">
+        <item>Water</item>
+        <item>Power</item>
+        <item>Internet</item>
+        <item>Shopping</item>
+        <item>Groceries</item>
+        <item>Cleaning</item>
+    </array>
 </resources>
