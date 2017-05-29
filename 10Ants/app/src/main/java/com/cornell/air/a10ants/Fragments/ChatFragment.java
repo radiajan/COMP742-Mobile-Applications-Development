@@ -48,7 +48,6 @@ public class ChatFragment extends Fragment{
         displayChatMessage(view);
 
         //Add Emoji
-        emojiButton = (ImageView)view.findViewById(R.id.emoji_button);
         submitButton = (ImageView)view.findViewById(R.id.submit_button);
         emojiconEditText = (EmojiconEditText)view.findViewById(R.id.emojicon_edit_text);
         /*emojIconActions = new EmojIconActions(getContext(),activity_main,emojiButton,emojiconEditText);
