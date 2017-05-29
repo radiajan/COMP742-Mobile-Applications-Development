@@ -31,4 +31,10 @@
             android:text="@string/expenses"
             android:textAllCaps="true" />
     </LinearLayout>
+    <Button
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="right"
+        android:id="@+id/btnAddExpense"
+        android:text="@string/add_expense"/>
 </android.support.v7.widget.Toolbar>

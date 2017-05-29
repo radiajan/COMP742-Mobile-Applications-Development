@@ -8,10 +8,10 @@
 
     <TabHost
         android:id="@+id/tabOverview"
-        android:layout_width="385dp"
-        android:layout_height="572dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-57dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-                <FrameLayout
+            <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -34,11 +34,20 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
+                        <Button
+                            android:id="@+id/btnAddPropertyLandlord"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:text="@string/add_property"
+                            />
+
                         <ListView
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
-                            android:id="@+id/listViewPropertyLandlord">
+                            android:id="@+id/listViewPropertyLandlord"
+                            android:layout_below="@+id/btnAddPropertyLandlord">
                         </ListView>
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -47,10 +56,17 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
+                        <Button
+                            android:id="@+id/btnAddPropertyTenant"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:text="@string/add_property" />
+
                         <ListView
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
-                            android:id="@+id/listViewPropertyTenant">
+                            android:id="@+id/listViewPropertyTenant"
+                            android:layout_below="@+id/btnAddPropertyTenant">
                         </ListView>
                     </RelativeLayout>
                 </FrameLayout>

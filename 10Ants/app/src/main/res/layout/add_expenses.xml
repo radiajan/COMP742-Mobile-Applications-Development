@@ -19,20 +19,18 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trInfo">
 
+        <TextView
+            android:text="@string/amount"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etAmount"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/amount" />
-
-        <TextView
-            android:id="@+id/tvAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="67dp"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow
@@ -41,20 +39,17 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trAmount">
 
-        <EditText
-            android:id="@+id/etCategory"
-            android:layout_width="123dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/category" />
-
         <TextView
-            android:id="@+id/tvCategory"
+            android:text="@string/select_expense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:id="@+id/spCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/property_type"/>
     </TableRow>
 
     <TableRow
@@ -63,20 +58,18 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trCategory">
 
+        <TextView
+            android:text="@string/pay_to"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etPayTo"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/pay_to" />
-
-        <TextView
-            android:id="@+id/tvPayTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow
@@ -85,19 +78,26 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trPayTo">
 
+        <TextView
+            android:text="@string/paid_on"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etPaidOn"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/paid_on" />
-
-        <TextView
-            android:id="@+id/tvPaidOn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:inputType="textPersonName" />
     </TableRow>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_expense"
+        android:layout_below="@+id/trPaidOn"
+        android:layout_centerHorizontal="true"
+        android:onClick="addExpense"/>
 </RelativeLayout>

@@ -22,5 +22,8 @@
         <activity android:name=".View.Login"></activity>
         <activity android:name=".View.PropertyDetails"></activity>
         <activity android:name=".Menu.MenuFrame"></activity>
+        <activity android:name=".View.addProperty"></activity>
+        <activity android:name=".View.addExpense"></activity>
+        <activity android:name=".View.addTenant"></activity>
     </application>
 </manifest>

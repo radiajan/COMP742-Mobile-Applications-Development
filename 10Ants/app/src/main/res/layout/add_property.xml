@@ -19,19 +19,18 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trInfo">
 
+        <TextView
+            android:text="@string/name"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/name" />
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="67dp"
-            android:layout_weight="4.01"/>
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow
@@ -40,19 +39,18 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trName">
 
+        <TextView
+            android:text="@string/address"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etAddress"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/address" />
-
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.01"/>
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow
@@ -61,28 +59,46 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trAddress">
 
+        <TextView
+            android:text="@string/description"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etDescription"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/description" />
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.01" />
+            android:inputType="textPersonName" />
     </TableRow>
 
+    <TableRow
+        android:id="@+id/trType"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/trDescription">
+
+        <TextView
+            android:text="@string/property_type"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:id="@+id/spType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/property_type"/>
+    </TableRow>
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_property"
-        android:layout_below="@+id/trDescription"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/trType"
+        android:layout_centerHorizontal="true"
+        android:onClick="addProperty"/>
 
 </RelativeLayout>

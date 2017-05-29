@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="67dp"
         android:background="@color/colorPrimary">
+
         <TextView
             android:text="@string/information_tenant"
             android:layout_gravity="center_vertical"
@@ -19,20 +20,18 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trInfo">
 
+        <TextView
+            android:text="@string/name"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/name" />
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="67dp"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow
@@ -41,20 +40,18 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trName">
 
+        <TextView
+            android:text="@string/email"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/email" />
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow
@@ -63,20 +60,18 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trEmail">
 
+        <TextView
+            android:text="@string/phone"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etPhone"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/phone" />
-
-        <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:inputType="textPersonName"/>
     </TableRow>
 
     <TableRow
@@ -85,19 +80,47 @@
         android:layout_height="67dp"
         android:layout_below="@+id/trPhone">
 
+        <TextView
+            android:text="@string/date_of_birth"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="15sp"/>
+
         <EditText
             android:id="@+id/etDateofBirth"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/date_of_birth" />
+            android:inputType="textPersonName" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trProperty"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@+id/trDateofBirth">
 
         <TextView
-            android:id="@+id/tvDateofBirth"
+            android:text="@string/select_property"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4.01"
-            android:text="TextView" />
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:id="@+id/spProperty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/trProperty"
+            android:entries="@array/property_type"/>
     </TableRow>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_tenant"
+        android:layout_below="@+id/trProperty"
+        android:layout_centerHorizontal="true"
+        android:onClick="addTenant"/>
 </RelativeLayout>

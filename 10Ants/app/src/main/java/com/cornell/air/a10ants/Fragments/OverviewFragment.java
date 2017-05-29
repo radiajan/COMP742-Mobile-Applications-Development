@@ -1,5 +1,6 @@
 package com.cornell.air.a10ants.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,13 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.PropertyList;
 import com.cornell.air.a10ants.R;
 import com.cornell.air.a10ants.View.PropertyDetails;
+import com.cornell.air.a10ants.View.addProperty;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by root on 7/05/17.
@@ -27,12 +39,52 @@ public class OverviewFragment extends Fragment {
     String[] NAMES = {"image1", "image2", "image3", "image4"};
     String[] DESCRIPTION = {"house", "house", "apartment", "apartment"};
 
+    //Reference to the property database
+    DatabaseReference databaseProperty;
+    ListView listViewPropertyLandlord;
+    List<Property> listProperty;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        // TODO Auto-generated method stub
+        super.onActivityCreated(savedInstanceState);
+
+        Button b = (Button) getView().findViewById(R.id.btnAddPropertyLandlord);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), addProperty.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.f_overview, container, false);
 
-        //Populate and add event to ListView
-        startListView(view);
+        //Find control
+        databaseProperty = FirebaseDatabase.getInstance().getReference("properties");
+        listViewPropertyLandlord = (ListView) view.findViewById(R.id.listViewPropertyLandlord);
+        listProperty = new ArrayList<>();
+
+        //Adds OnClick event
+        listViewPropertyLandlord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Property property = listProperty.get(position);
+
+                Intent intent = new Intent(view.getContext(), PropertyDetails.class);
+                intent.putExtra("propertyId", property.getId());
+                intent.putExtra("propertyName", property.getName());
+
+                startActivity(intent);
+            }
+        });
+
+        //Populate and add event to ListView to landlord
+        startListViewTenant(view);
 
         //Create tabs for the Overview
         CreateTab(view);
@@ -55,15 +107,34 @@ public class OverviewFragment extends Fragment {
         //Create a tab for Tenants
         TabHost.TabSpec tenantTab = tabs.newTabSpec("tabTenant");
         tenantTab.setContent(R.id.tabTenant);
-        tenantTab.setIndicator("addTenant");
+        tenantTab.setIndicator("Tenant");
         tabs.addTab(tenantTab);
     }
 
-    //Start ListView Event
-    private void startListView(View view)
+    //Start ListView Event to Landlords
+    private void startListViewLandlord(View view, List<Property> listProperty)
+    {
+       /* //Finds the control in the View
+        ListView listViewPropertyLandlord = (ListView) view.findViewById(R.id.listViewPropertyLandlord);
+
+        //Adds OnClick event
+        listViewPropertyLandlord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Property property = listProperty.get(position);
+
+                Intent intent = new Intent(view.getContext(), PropertyDetails.class);
+
+                startActivity(intent);
+            }
+        });*/
+    }
+
+    //Start ListView Event to Tenants
+    private void startListViewTenant(View view)
     {
         //Finds the control in the View
-        ListView listViewPropertyLandlord = (ListView) view.findViewById(R.id.listViewPropertyLandlord);
+        ListView listViewPropertyLandlord = (ListView) view.findViewById(R.id.listViewPropertyTenant);
 
         //Instance of Adapter class
         CustomAdapter customAdapter = new CustomAdapter();
@@ -78,15 +149,43 @@ public class OverviewFragment extends Fragment {
                 Property prop = new Property();
                 Intent intent = new Intent(view.getContext(), PropertyDetails.class);
 
-                prop.setName("Name");
-                prop.setAddress("8 Airedale Street");
-                prop.setDescription("This is a description");
-
-                intent.putExtra("addProperty", prop);
                 startActivity(intent);
             }
         });
     }
+
+    /**
+     * Loads the list of the tenant and the landlord
+     */
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+
+        databaseProperty.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Clears previous data
+                listProperty.clear();
+
+                //Add property to the list
+                for (DataSnapshot propertySnapshot : dataSnapshot.getChildren()){
+                    Property property = propertySnapshot.getValue(Property.class);
+
+                    listProperty.add(property);
+                }
+
+                PropertyList adapter = new PropertyList(getActivity(), listProperty);
+                listViewPropertyLandlord.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

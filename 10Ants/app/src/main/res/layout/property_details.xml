@@ -30,9 +30,9 @@
     <include
         android:id="@+id/tbrExpense"
         layout="@layout/custom_bar_expense"
-        android:layout_width="391dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="217dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
         android:layout_below="@+id/tbrTenant"
         android:layout_alignParentStart="true" />
 

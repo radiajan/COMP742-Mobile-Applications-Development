@@ -31,4 +31,10 @@
             android:text="@string/tenants"
             android:textAllCaps="true" />
     </LinearLayout>
+    <Button
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="right"
+        android:id="@+id/btnAddTenant"
+        android:text="@string/add_tenant"/>
 </android.support.v7.widget.Toolbar>

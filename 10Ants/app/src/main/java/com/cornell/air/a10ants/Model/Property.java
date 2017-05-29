@@ -8,15 +8,30 @@ import android.support.design.internal.ParcelableSparseArray;
  * Created by root on 8/05/17.
  */
 
-public class Property implements Parcelable {
+public class Property{
 
+    private String id;
     private String name;
-    private String Address;
-    private String Description;
+    private String address;
+    private String description;
+    private String type;
 
     public Property(){
 
     }
+
+    public Property(String id, String name, String address, String description, String type){
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {this.id = id;}
 
     public String getName() {
         return name;
@@ -26,52 +41,19 @@ public class Property implements Parcelable {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
-    // Parcelling part
-    public Property(Parcel in){
-        String[] data = new String[3];
-
-        in.readStringArray(data);
-
-        // the order needs to be the same as in writeToParcel() method
-        setName(data[0]);
-        setAddress(data[1]);
-        setDescription(data[2]);
-    }
-
-    @Override
-    public int describeContents(){
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[] {
-                this.name,
-                this.Address,
-                this.Description
-        });
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Property createFromParcel(Parcel in) {
-            return new Property(in);
-        }
-
-        public Property[] newArray(int size) {
-            return new Property[size];
-        }
-    };
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 }

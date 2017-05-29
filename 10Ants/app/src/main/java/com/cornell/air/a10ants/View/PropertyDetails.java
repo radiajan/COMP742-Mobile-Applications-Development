@@ -10,10 +10,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.cornell.air.a10ants.R;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,13 +35,36 @@ public class PropertyDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property_details);
 
-        /*Toolbar tbrTenant = (Toolbar) findViewById(R.id.tbrTenant); // Attaching the layout to the toolbar object
-        setSupportActionBar(tbrTenant);
+        //Retrive data from Intent object
+        Intent intent = getIntent();
+        final String propertyId = intent.getStringExtra("propertyId");
+        final String propertyName = intent.getStringExtra("propertyName");
 
-        Toolbar tbrExpense = (Toolbar) findViewById(R.id.tbrExpense); // Attaching the layout to the toolbar object
-        setSupportActionBar(tbrExpense);*/
+        //Create the event to redirect to ADD EXPENSE layout
+        Button btnAddExpense = (Button) findViewById(R.id.btnAddExpense);
+        btnAddExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), addExpense.class);
+                intent.putExtra("propertyId", propertyId);
+                intent.putExtra("propertyName", propertyName);
 
-        //setupToolbar();
+                startActivity(intent);
+            }
+        });
+
+        //Create the event to redirect to ADD TENANT layout
+        Button btnAddTenant = (Button) findViewById(R.id.btnAddTenant);
+        btnAddTenant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), addTenant.class);
+                intent.putExtra("propertyId", propertyId);
+                intent.putExtra("propertyName", propertyName);
+
+                startActivity(intent);
+            }
+        });
 
         //Finds ListView in layout
         ListView lvTenant = (ListView) findViewById(R.id.lvTenant);
@@ -88,28 +113,6 @@ public class PropertyDetails extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    /**
-     * Adds a listener event to the toolbar
-     */
-    private void setupToolbar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-
-        // Hide the title
-        getSupportActionBar().setTitle(null);
-
-        // Set onClickListener to customView
-        ImageView imgAdd = (ImageView) findViewById(R.id.menuAdd);
-        imgAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO
-                Intent intent = new Intent(v.getContext(), addExpense.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private class StableArrayAdapter extends ArrayAdapter<String> {
