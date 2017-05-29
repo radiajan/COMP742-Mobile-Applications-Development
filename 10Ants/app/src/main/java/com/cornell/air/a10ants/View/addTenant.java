@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.cornell.air.a10ants.DAL.TenantDAL;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.Tenant;
 import com.cornell.air.a10ants.R;
@@ -31,23 +32,14 @@ public class addTenant extends AppCompatActivity {
     EditText etDateofBirth;
     Spinner spProperty;
 
+    //Class instance
+    Tenant tenant;
+    TenantDAL tenantDAL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_tenant);
-
-        //Get intent object
-        Intent intent = getIntent();
-        String propertyId = intent.getStringExtra("propertyId");
-
-        //Create instance of the property node
-        databaseTenants = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
-
-        etName = (EditText) findViewById(R.id.etName);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPhone = (EditText) findViewById(R.id.etPhone);
-        etDateofBirth = (EditText)findViewById(R.id.etDateofBirth);
-        spProperty = (Spinner)findViewById(R.id.spProperty);
     }
 
     /**
@@ -55,27 +47,31 @@ public class addTenant extends AppCompatActivity {
      * @param view
      */
     public void addTenant(View view){
-        String name = etName.getText().toString().trim();
-        String email = etName.getText().toString().trim();
-        int phone =  Integer.parseInt(etPhone.getText().toString());
-        String dateOfBirth = etDateofBirth.getText().toString().trim();
-        String type = spProperty.getSelectedItem().toString();
+        //Get intent object
+        Intent intent = getIntent();
+        String propertyId = intent.getStringExtra("propertyId");
 
-        if(!TextUtils.isEmpty(name)){
-            //Creates a unique id
-            String id = databaseTenants.push().getKey();
+        //Set the values to the properties
+        tenant = new Tenant();
+        tenant.setName(((EditText) findViewById(R.id.etName)).getText().toString());
+        tenant.setEmail(((EditText) findViewById(R.id.etEmail)).getText().toString());
+        tenant.setPhone(Integer.parseInt(((EditText) findViewById(R.id.etPhone)).getText().toString()));
+        tenant.setDateOfBirth(((EditText) findViewById(R.id.etDateofBirth)).getText().toString());
+        tenant.setProperty(((Spinner)findViewById(R.id.spProperty)).getSelectedItem().toString());
 
-            //Create a new property child object
-            Tenant tenant = new Tenant(id, name, email, phone, dateOfBirth, type);
+        //Create the instance of the DAO object
+        tenantDAL = new TenantDAL(propertyId);
 
-            //Includes item in database
-            databaseTenants.child(id).setValue(tenant);
+        //Add the expense values
+        boolean isSaved = tenantDAL.addTenant(tenant);
 
-            //Display message, included successfully
-            Toast.makeText(this, "Tenant added", Toast.LENGTH_SHORT).show();
+        //Display message
+        if(isSaved) {
+            Toast.makeText(this, "Tenant saved successfully", Toast.LENGTH_SHORT).show();
+            finish();
         }
         else{
-            Toast.makeText(this, "You should enter a name", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Tenant unsuccessfull", Toast.LENGTH_SHORT).show();
         }
     }
 }

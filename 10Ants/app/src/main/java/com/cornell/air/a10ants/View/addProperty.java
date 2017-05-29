@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.cornell.air.a10ants.DAL.ExpenseDAL;
+import com.cornell.air.a10ants.DAL.PropertyDAL;
+import com.cornell.air.a10ants.Model.Expense;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.R;
 import com.google.firebase.database.DataSnapshot;
@@ -24,56 +27,41 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class addProperty extends AppCompatActivity{
-
-    //Reference to the property database
-    DatabaseReference databaseProperty;
-
-    //Reference of the controllers
-    EditText etName;
-    EditText etAddress;
-    EditText etDescription;
-    Spinner spType;
+    //Class instance
+    PropertyDAL propertyDAL;
+    Property property;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_property);
-
-        //Create instance of the property node
-        databaseProperty = FirebaseDatabase.getInstance().getReference("properties");
-
-        //Find controls reference in layout
-        etName = (EditText) findViewById(R.id.etName);
-        etAddress = (EditText) findViewById(R.id.etAddress);
-        etDescription = (EditText) findViewById(R.id.etDescription);
-        spType  = (Spinner)findViewById(R.id.spType);
     }
 
     /**
-     *
+     * Button event
      * @param view
      */
     public void addProperty(View view){
-        String name = etName.getText().toString().trim();
-        String address = etAddress.getText().toString().trim();
-        String description = etDescription.getText().toString().trim();
-        String type = spType.getSelectedItem().toString();
+        //Set the values to the properties
+        property = new Property();
+        property.setName(((EditText)findViewById(R.id.etName)).getText().toString());
+        property.setAddress(((EditText)findViewById(R.id.etAddress)).getText().toString());
+        property.setDescription(((EditText)findViewById(R.id.etDescription)).getText().toString());
+        property.setType(((Spinner)findViewById(R.id.spType)).getSelectedItem().toString());
 
-        if(!TextUtils.isEmpty(name)){
-            //Creates a unique id
-            String id = databaseProperty.push().getKey();
+        //Create the instance of the DAO object
+        propertyDAL = new PropertyDAL();
 
-            //Create a new property child object
-            Property property = new Property(id, name, address, description, type);
+        //Add the property values
+        boolean isSaved = propertyDAL.addProperty(property);
 
-            //Includes item in database
-            databaseProperty.child(id).setValue(property);
-
-            //Display message, included successfully
-            Toast.makeText(this, "Property added", Toast.LENGTH_SHORT).show();
+        //Display message
+        if(isSaved) {
+            Toast.makeText(this, "Expense saved successfully", Toast.LENGTH_SHORT).show();
+            finish();
         }
         else{
-            Toast.makeText(this, "You should enter a name", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Expense unsuccessfull", Toast.LENGTH_SHORT).show();
         }
     }
 }
