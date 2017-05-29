@@ -57,11 +57,11 @@ public class addProperty extends AppCompatActivity{
 
         //Display message
         if(isSaved) {
-            Toast.makeText(this, "Expense saved successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Property saved successfully", Toast.LENGTH_SHORT).show();
             finish();
         }
         else{
-            Toast.makeText(this, "Expense unsuccessfull", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Property unsuccessfull", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -11,6 +11,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.cornell.air.a10ants.Menu.MenuFrame;
 import com.cornell.air.a10ants.R;
 
 /**
@@ -44,7 +45,7 @@ public class Splashscreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(Splashscreen.this, Login.class));
+                startActivity(new Intent(Splashscreen.this, MenuFrame.class));
                 finish();
             }
         }, 8000);

@@ -18,7 +18,7 @@ public class TenantDAL {
 
     public TenantDAL(String propertyId){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
     }
 
     /**
