@@ -26,12 +26,12 @@ public class ChatMessageDAL {
 
     public ChatMessageDAL(){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("430-messages");
+        database = FirebaseDatabase.getInstance().getReference("messages");
     }
 
     public ChatMessageDAL(String propertyId){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference(propertyId + "-messages");
+        database = FirebaseDatabase.getInstance().getReference("messages");
     }
 
     public void addMessage(String text){

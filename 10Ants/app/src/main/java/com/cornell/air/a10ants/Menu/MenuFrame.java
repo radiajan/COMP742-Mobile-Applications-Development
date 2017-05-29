@@ -67,9 +67,9 @@ public class MenuFrame extends AppCompatActivity {
         setItemsFromMenu();
 
         //Adds badge to Bottombar menu item
-        BottomBarBadge unread;
+        /*BottomBarBadge unread;
         unread = mBottomBar.makeBadgeForTabAt(2,"#FF0000",5);
-        unread.show();
+        unread.show();*/
     }
 
     @Override
@@ -144,11 +144,6 @@ public class MenuFrame extends AppCompatActivity {
                     AboutFragment a = new AboutFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, a).commit();
                 }
-                //Redirects to Reminder menu
-                /*else if (menuItemId == R.id.menuReminder) {
-                    ReminderFragment rem = new ReminderFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.frame, rem).commit();
-                }*/
             }
 
             @Override

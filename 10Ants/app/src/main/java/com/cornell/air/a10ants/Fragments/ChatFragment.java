@@ -70,7 +70,7 @@ public class ChatFragment extends Fragment{
     private void displayChatMessage(View view) {
 
         ListView listOfMessage = (ListView)view.findViewById(R.id.list_of_message);
-        adapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.custom_list_chat, FirebaseDatabase.getInstance().getReference("-messages"))
+        adapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.custom_list_chat, FirebaseDatabase.getInstance().getReference("messages"))
         {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
