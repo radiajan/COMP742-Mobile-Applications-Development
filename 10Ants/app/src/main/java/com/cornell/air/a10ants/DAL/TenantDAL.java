@@ -71,6 +71,10 @@ public class TenantDAL {
         return true;
     }
 
+    /**
+     * Delete tenant
+     * @param id
+     */
     public void deleteTenant(String id){
         database.child(id).removeValue();
     }

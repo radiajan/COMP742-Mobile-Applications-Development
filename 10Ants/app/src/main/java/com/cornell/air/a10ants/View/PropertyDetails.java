@@ -176,60 +176,12 @@ public class PropertyDetails extends AppCompatActivity {
 
         //Instantiate properties
         expenseDAL = new ExpenseDAL(propertyId,PropertyDetails.this, lvExpense, listExpense);
-
         //Fill the listview
         expenseDAL.listExpense();
 
         //Instantiate properties
         tenantDAL = new TenantDAL(propertyId,PropertyDetails.this, lvTenant, listTenant);
-
         //Fill the listview
         tenantDAL.listTenant();
-
-        /*//Fetch data for the expenses
-        databaseExpense.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Clears previous data
-                listExpense.clear();
-
-                //Add property to the list
-                for (DataSnapshot expenseSnapshot : dataSnapshot.getChildren()){
-                    Expense expense = expenseSnapshot.getValue(Expense.class);
-                    listExpense.add(expense);
-                }
-
-                ExpenseList adapter = new ExpenseList(PropertyDetails.this, listExpense);
-                lvExpense.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-        /*//Fetch data for the tenants
-        databaseTenant.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Clears previous data
-                listTenant.clear();
-
-                //Add property to the list
-                for (DataSnapshot tenantSnapshot : dataSnapshot.getChildren()){
-                    Tenant tenant = tenantSnapshot.getValue(Tenant.class);
-                    listTenant.add(tenant);
-                }
-
-                TenantList adapter = new TenantList(PropertyDetails.this, listTenant);
-                lvTenant.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
     }
 }
