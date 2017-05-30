@@ -25,7 +25,7 @@ public class AttachReport extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.attach_report);
 
-        Button buttonPick = (Button)findViewById(R.id.btnReport);
+        Button buttonPick = (Button)findViewById(R.id.buttonpick);
         textFile = (TextView)findViewById(R.id.textfile);
 
         buttonPick.setOnClickListener(new Button.OnClickListener(){

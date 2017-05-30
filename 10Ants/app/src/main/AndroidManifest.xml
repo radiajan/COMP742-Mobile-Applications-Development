@@ -25,5 +25,8 @@
         <activity android:name=".View.addProperty"></activity>
         <activity android:name=".View.addExpense"></activity>
         <activity android:name=".View.addTenant"></activity>
+        <activity android:name=".ReportAttachment.AttachExpense"></activity>
+        <activity android:name=".ReportAttachment.AttachReceipt"></activity>
+        <activity android:name=".ReportAttachment.AttachReport"></activity>
     </application>
 </manifest>

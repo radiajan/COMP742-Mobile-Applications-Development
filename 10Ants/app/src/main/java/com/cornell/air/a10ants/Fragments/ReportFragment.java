@@ -19,11 +19,19 @@ import com.cornell.air.a10ants.View.addProperty;
  */
 
 public class ReportFragment extends Fragment {
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        // TODO Auto-generated method stub
+        super.onActivityCreated(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.f_report, container, false);
 
-        Button btnReceipt = (Button)view.findViewById(R.id.btnReceipt);
+        Button btnReceipt = (Button) view.findViewById(R.id.btnReceipt);
         btnReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,16 +41,16 @@ public class ReportFragment extends Fragment {
         });
 
         Button btnExpense = (Button) view.findViewById(R.id.btnExpense);
-        btnReceipt.setOnClickListener(new View.OnClickListener() {
+        btnExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AttachExpense.class);
+                Intent intent = new Intent(v.getContext(), AttachReceipt.class);
                 startActivity(intent);
             }
         });
 
         Button btnReport = (Button) view.findViewById(R.id.btnReport);
-        btnReceipt.setOnClickListener(new View.OnClickListener() {
+        btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AttachReport.class);

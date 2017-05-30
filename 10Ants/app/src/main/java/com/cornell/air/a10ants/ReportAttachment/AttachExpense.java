@@ -25,7 +25,7 @@ public class AttachExpense extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.attach_expenses);
 
-        Button buttonPick = (Button)findViewById(R.id.btnExpense);
+        Button buttonPick = (Button)findViewById(R.id.buttonpick);
         textFile = (TextView)findViewById(R.id.textfile);
 
         buttonPick.setOnClickListener(new Button.OnClickListener(){
