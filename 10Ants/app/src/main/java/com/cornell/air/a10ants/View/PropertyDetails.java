@@ -19,6 +19,7 @@ import android.widget.PopupMenu;
 
 import com.cornell.air.a10ants.DAL.ExpenseDAL;
 import com.cornell.air.a10ants.DAL.PropertyDAL;
+import com.cornell.air.a10ants.DAL.TenantDAL;
 import com.cornell.air.a10ants.Model.Expense;
 import com.cornell.air.a10ants.Model.ExpenseList;
 import com.cornell.air.a10ants.Model.Property;
@@ -51,6 +52,10 @@ public class PropertyDetails extends AppCompatActivity {
     ListView lvExpense;
     Tenant tenant;
     Expense expense;
+    TenantDAL tenantDAL;
+    ExpenseDAL expenseDAL;
+    String propertyId;
+    String propertyName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +64,8 @@ public class PropertyDetails extends AppCompatActivity {
 
         //Retrive data from Intent object
         Intent intent = getIntent();
-        final String propertyId = intent.getStringExtra("propertyId");
-        final String propertyName = intent.getStringExtra("propertyName");
+        propertyId = intent.getStringExtra("propertyId");
+        propertyName = intent.getStringExtra("propertyName");
 
         //Get the database reference
         databaseExpense = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
@@ -118,7 +123,9 @@ public class PropertyDetails extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         //Delete selected item
                         if(item.getTitle().equals("Delete")) {
-                            databaseTenant.child(tenant.getId()).removeValue();
+                            tenantDAL = new TenantDAL(propertyId);
+                            tenantDAL.deleteTenant(tenant.getId());
+                            //databaseTenant.child(tenant.getId()).removeValue();
                         }
                         return true;
                     }
@@ -146,7 +153,9 @@ public class PropertyDetails extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         //Delete selected item
                         if(item.getTitle().equals("Delete")) {
-                            databaseExpense.child(expense.getId()).removeValue();
+                            expenseDAL = new ExpenseDAL(propertyId);
+                            expenseDAL.deleteExpense(expense.getId());
+                            //databaseExpense.child(expense.getId()).removeValue();
                         }
                         return true;
                     }
@@ -165,7 +174,19 @@ public class PropertyDetails extends AppCompatActivity {
     {
         super.onStart();
 
-        //Fetch data for the expenses
+        //Instantiate properties
+        expenseDAL = new ExpenseDAL(propertyId,PropertyDetails.this, lvExpense, listExpense);
+
+        //Fill the listview
+        expenseDAL.listExpense();
+
+        //Instantiate properties
+        tenantDAL = new TenantDAL(propertyId,PropertyDetails.this, lvTenant, listTenant);
+
+        //Fill the listview
+        tenantDAL.listTenant();
+
+        /*//Fetch data for the expenses
         databaseExpense.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -186,9 +207,9 @@ public class PropertyDetails extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
-        //Fetch data for the tenants
+        /*//Fetch data for the tenants
         databaseTenant.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -209,6 +230,6 @@ public class PropertyDetails extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 }

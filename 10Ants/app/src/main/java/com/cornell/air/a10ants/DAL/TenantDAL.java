@@ -1,12 +1,21 @@
 package com.cornell.air.a10ants.DAL;
 
+import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.cornell.air.a10ants.Model.Expense;
+import com.cornell.air.a10ants.Model.ExpenseList;
 import com.cornell.air.a10ants.Model.Tenant;
+import com.cornell.air.a10ants.Model.TenantList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 /**
  * Created by massami on 29/05/2017.
@@ -15,10 +24,21 @@ import com.google.firebase.database.FirebaseDatabase;
 public class TenantDAL {
     //Reference to the expense database
     DatabaseReference database;
+    Activity activity;
+    ListView list;
+    List<Tenant> listTenant;
 
     public TenantDAL(String propertyId){
         //Load the data base
         database = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
+    }
+
+    public TenantDAL(String propertyId, Activity activity, ListView list, List<Tenant> listTenant){
+        //Load the data base
+        database = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
+        this.activity = activity;
+        this.list = list;
+        this.listTenant = listTenant;
     }
 
     /**
@@ -51,9 +71,40 @@ public class TenantDAL {
         return true;
     }
 
+    public void deleteTenant(String id){
+        database.child(id).removeValue();
+    }
+
+    /**
+     * list the expenses
+     */
+    public void listTenant(){
+        //Fetch data for the expenses
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Clears previous data
+                listTenant.clear();
+
+                //Add property to the list
+                for (DataSnapshot expenseSnapshot : dataSnapshot.getChildren()){
+                    Tenant tenant = expenseSnapshot.getValue(Tenant.class);
+                    listTenant.add(tenant);
+                }
+
+                TenantList adapter = new TenantList(activity, listTenant);
+                list.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     /**
      * Check if the field if empty
-     * @param expense
      * @return validation
      */
     private boolean isFieldEmpty(Tenant tenant){

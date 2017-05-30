@@ -1,17 +1,23 @@
 package com.cornell.air.a10ants.DAL;
 
+import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.cornell.air.a10ants.Model.Expense;
+import com.cornell.air.a10ants.Model.ExpenseList;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.PropertyList;
+import com.cornell.air.a10ants.View.PropertyDetails;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by massami on 29/05/2017.
@@ -20,10 +26,21 @@ import java.util.ArrayList;
 public class ExpenseDAL {
     //Reference to the expense database
     DatabaseReference database;
+    Activity activity;
+    ListView list;
+    List<Expense> listExpense;
 
     public ExpenseDAL(String propertyId){
         //Load the data base
         database = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+    }
+
+    public ExpenseDAL(String propertyId, Activity activity, ListView list, List<Expense> listExpense){
+        //Load the data base
+        database = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+        this.activity = activity;
+        this.list = list;
+        this.listExpense = listExpense;
     }
 
     /**
@@ -54,6 +71,42 @@ public class ExpenseDAL {
         }
 
         return true;
+    }
+
+    /**
+     * delete the expense
+     * @param id
+     */
+    public void deleteExpense(String id){
+        database.child(id).removeValue();
+    }
+
+    /**
+     * list the expenses
+     */
+    public void listExpense(){
+        //Fetch data for the expenses
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Clears previous data
+                listExpense.clear();
+
+                //Add property to the list
+                for (DataSnapshot expenseSnapshot : dataSnapshot.getChildren()){
+                    Expense expense = expenseSnapshot.getValue(Expense.class);
+                    listExpense.add(expense);
+                }
+
+                ExpenseList adapter = new ExpenseList(activity, listExpense);
+                list.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**
