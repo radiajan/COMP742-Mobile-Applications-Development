@@ -44,6 +44,7 @@ public class OverviewFragment extends Fragment {
     ListView listViewPropertyLandlord;
     List<Property> listProperty;
     Property property;
+    PropertyDAL propertyDAL;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
@@ -102,7 +103,8 @@ public class OverviewFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         //Delete selected item
                         if(item.getTitle().equals("Delete")) {
-                            databaseProperty.child(property.getId()).removeValue();
+                            propertyDAL = new PropertyDAL();
+                            propertyDAL.deleteProperty(property.getId());
                         }
                         return true;
                     }
@@ -146,27 +148,10 @@ public class OverviewFragment extends Fragment {
     {
         super.onStart();
 
-        databaseProperty.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Clears previous data
-                listProperty = new ArrayList<>();;
+        //Instantiate properties
+        propertyDAL = new PropertyDAL(getActivity(), listViewPropertyLandlord, listProperty);
 
-                //Add property to the list
-                for (DataSnapshot propertySnapshot : dataSnapshot.getChildren()){
-                    Property property = propertySnapshot.getValue(Property.class);
-
-                    listProperty.add(property);
-                }
-
-                PropertyList adapter = new PropertyList(getActivity(), listProperty);
-                listViewPropertyLandlord.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        //Fill the listview
+        propertyDAL.listProperty();
     }
 }

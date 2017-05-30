@@ -27,15 +27,18 @@ public class PropertyDAL {
     DatabaseReference database;
     List<Property> listProperty;
     Activity activityProperty;
+    ListView listPropertyDisplay;
 
     public PropertyDAL(){
         //Create instance of the property node
         database = FirebaseDatabase.getInstance().getReference("properties");
     }
 
-    public PropertyDAL(Activity activity){
+    public PropertyDAL(Activity activity, ListView listPropertyDisplay, List<Property> listProperty){
         database = FirebaseDatabase.getInstance().getReference("properties");
         this.activityProperty = activity;
+        this.listPropertyDisplay = listPropertyDisplay;
+        this.listProperty = listProperty;
     }
 
     /**
@@ -63,6 +66,41 @@ public class PropertyDAL {
         }
 
         return true;
+    }
+
+    /**
+     * List the properties
+     */
+    public void listProperty() {
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Clears previous data
+                listProperty.clear();
+
+                //Add property to the list
+                for (DataSnapshot propertySnapshot : dataSnapshot.getChildren()) {
+                    Property property = propertySnapshot.getValue(Property.class);
+                    listProperty.add(property);
+                }
+
+                PropertyList adapter = new PropertyList(activityProperty, listProperty);
+                listPropertyDisplay.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /**
+     * Delete property
+     * @param id to be deleted
+     */
+    public void deleteProperty(String id){
+        database.child(id).removeValue();
     }
 
     /**
