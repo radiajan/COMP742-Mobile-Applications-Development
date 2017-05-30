@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/colorGray"
+    android:background="@color/colorBlue"
     android:padding="16dp">
 
     <Button
@@ -16,7 +16,10 @@
         android:drawableLeft="@drawable/receipt"
         android:textSize="20sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/colororange">
+    </Button>
+
 
     <Button
         android:id="@+id/btnExpense"
@@ -28,6 +31,7 @@
         android:drawableLeft="@drawable/expense"
         android:textSize="20sp"
         android:layout_centerVertical="true"
+        android:background="@color/colororange"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -40,6 +44,7 @@
         android:drawableLeft="@drawable/report5"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
+        android:background="@color/colororange"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>
