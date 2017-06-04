@@ -10,18 +10,18 @@ public class Expense {
     private String id;
     private String amount;
     private String expense;
-    private String payTo;
+    private String paidTo;
     private String paidOn;
 
     public Expense(){
 
     }
 
-    public Expense(String id ,String amount, String expense, String payTo, String paidOn){
+    public Expense(String id ,String amount, String expense, String paidTo, String paidOn){
         this.id = id;
         this.amount = amount;
         this.expense = expense;
-        this.payTo = payTo;
+        this.paidTo = paidTo;
         this.paidOn = paidOn;
     }
 
@@ -34,8 +34,8 @@ public class Expense {
     public String getExpense() {return expense;}
     public void setExpense(String expense) {this.expense = expense;}
 
-    public String getPayTo() {return payTo;}
-    public void setPayTo(String payTo) {this.payTo = payTo;}
+    public String getPaidTo() {return paidTo;}
+    public void setPaidTo(String paidTo) {this.paidTo = paidTo;}
 
     public String getPaidOn() {return paidOn;}
     public void setPaidOn(String paidOn) {this.paidOn = paidOn;}

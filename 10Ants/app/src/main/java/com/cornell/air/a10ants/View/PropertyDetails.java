@@ -125,7 +125,17 @@ public class PropertyDetails extends AppCompatActivity {
                         if(item.getTitle().equals("Delete")) {
                             tenantDAL = new TenantDAL(propertyId);
                             tenantDAL.deleteTenant(tenant.getId());
-                            //databaseTenant.child(tenant.getId()).removeValue();
+                        }
+                        else if (item.getTitle().equals("Edit")) {
+                            Intent intent = new Intent(getBaseContext(), addTenant.class);
+                            intent.putExtra("propertyId", propertyId);
+                            intent.putExtra("tenantId", tenant.getId());
+                            intent.putExtra("tenantName", tenant.getName());
+                            intent.putExtra("tenantEmail", tenant.getEmail());
+                            intent.putExtra("tenantPhone", tenant.getPhone());
+                            intent.putExtra("tenantDateOfBirth", tenant.getDateOfBirth());
+
+                            startActivity(intent);
                         }
                         return true;
                     }
@@ -155,7 +165,17 @@ public class PropertyDetails extends AppCompatActivity {
                         if(item.getTitle().equals("Delete")) {
                             expenseDAL = new ExpenseDAL(propertyId);
                             expenseDAL.deleteExpense(expense.getId());
-                            //databaseExpense.child(expense.getId()).removeValue();
+                        }
+                        else if (item.getTitle().equals("Edit")) {
+                            Intent intent = new Intent(getBaseContext(), addExpense.class);
+                            intent.putExtra("propertyId", propertyId);
+                            intent.putExtra("expenseId", expense.getId());
+                            intent.putExtra("expenseAmount", expense.getAmount());
+                            intent.putExtra("expenseExpense", expense.getExpense());
+                            intent.putExtra("expensePaidOn", expense.getPaidOn());
+                            intent.putExtra("expensePaidTo", expense.getPaidTo());
+
+                            startActivity(intent);
                         }
                         return true;
                     }

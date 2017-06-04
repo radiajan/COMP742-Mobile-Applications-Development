@@ -44,6 +44,33 @@ public class ExpenseDAL {
     }
 
     /**
+     * Edit the validations of the controls
+     * @param expense
+     */
+    public boolean editExpense(Expense expense)
+    {
+        try{
+            if(isFieldEmpty(expense))
+            {
+                //Includes item in database
+                database.child(expense.getId()).setValue(expense);
+
+                //Successfull
+                return true;
+            }
+            else
+            {
+                //Empty field
+                return false;
+            }
+        }catch(Exception e){
+            Log.e("Error: ",e.getMessage());
+        }
+
+        return true;
+    }
+
+    /**
      * Add the validations of the controls
      * @param expense
      */
@@ -115,10 +142,10 @@ public class ExpenseDAL {
      * @return validation
      */
     private boolean isFieldEmpty(Expense expense){
-        if(!TextUtils.isEmpty(expense.getAmount()) &&
-           !TextUtils.isEmpty(expense.getExpense()) &&
+        if(!TextUtils.isEmpty(expense.getExpense()) &&
            !TextUtils.isEmpty(expense.getPaidOn()) &&
-           !TextUtils.isEmpty(expense.getPayTo()))
+           !TextUtils.isEmpty(expense.getPaidTo()) &&
+           !TextUtils.isEmpty(expense.getAmount()))
         {
             return true;
         }

@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "104100809985-abdjr67l7qvbamlqtgu03ta1vsvlne4i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cornell.air.a10ants",
+            "certificate_hash": "2df90d6b58a3a6186dee493cf03ff893abae3921"
+          }
+        },
+        {
+          "client_id": "104100809985-714aj1r2qnh4ju0pkqaa6ik6qj1g25i2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cornell.air.a10ants",
+            "certificate_hash": "f711589edd91a27f1d2f21da60be9d61cacc4442"
+          }
+        },
+        {
           "client_id": "104100809985-l67gtn6uko9p61gvqe2d81gmfja1bfrt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

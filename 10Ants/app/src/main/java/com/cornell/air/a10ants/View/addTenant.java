@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -36,27 +37,38 @@ public class addTenant extends AppCompatActivity {
 
     //Reference of the controllers
     EditText etDateofBirth;
+    EditText etName;
+    EditText etPhone;
+    EditText etEmail;
 
     //Class instance
     Tenant tenant;
     TenantDAL tenantDAL;
+
+    //Variable instance
+    String propertyId;
+    String tenantId;
+    String tenantName;
+    String tenantEmail;
+    int tenantPhone;
+    String tenantDateOfBirth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_tenant);
 
-        etDateofBirth = (EditText) findViewById(R.id.etDateofBirth);
-        etDateofBirth.setOnClickListener(new View.OnClickListener() {
+        //Set the calendar object to the EditText control
+        setCalendarEvent();
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(addTenant.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        //Get data from intent object
+        getIntentData();
+
+        //Find controls in layout
+        findControls();
+
+        //Set values
+        setControlData();
     }
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -84,21 +96,32 @@ public class addTenant extends AppCompatActivity {
     public void addTenant(View view){
         //Get intent object
         Intent intent = getIntent();
-        String propertyId = intent.getStringExtra("propertyId");
+        propertyId = intent.getStringExtra("propertyId");
 
         //Set the values to the properties
         tenant = new Tenant();
+
+        //Check if the user is editing the property
+        if(tenantId != null)
+            tenant.setId(tenantId);
+
         tenant.setName(((EditText) findViewById(R.id.etName)).getText().toString());
         tenant.setEmail(((EditText) findViewById(R.id.etEmail)).getText().toString());
         tenant.setPhone(Integer.parseInt(((EditText) findViewById(R.id.etPhone)).getText().toString()));
         tenant.setDateOfBirth(((EditText) findViewById(R.id.etDateofBirth)).getText().toString());
-        tenant.setProperty(((Spinner)findViewById(R.id.spProperty)).getSelectedItem().toString());
 
         //Create the instance of the DAO object
         tenantDAL = new TenantDAL(propertyId);
 
         //Add the expense values
-        boolean isSaved = tenantDAL.addTenant(tenant);
+        boolean isSaved;
+
+        //Add or Edit tenant
+        if(tenantId == null) {
+            isSaved = tenantDAL.addTenant(tenant);
+        }else{
+            isSaved = tenantDAL.editTenant(tenant);
+        }
 
         //Display message
         if(isSaved) {
@@ -106,7 +129,58 @@ public class addTenant extends AppCompatActivity {
             finish();
         }
         else{
-            Toast.makeText(this, "Tenant unsuccessfull", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tenant data not saved", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Set the calendar event to the EditText
+     */
+    private void setCalendarEvent(){
+        etDateofBirth = (EditText) findViewById(R.id.etDateofBirth);
+        etDateofBirth.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(addTenant.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
+    /**
+     * Get data from intent object
+     */
+    private void getIntentData(){
+        //Get intent object
+        Intent intent = getIntent();
+        propertyId = intent.getStringExtra("propertyId");
+        tenantId = intent.getStringExtra("tenantId");
+        tenantName = intent.getStringExtra("tenantName");
+        tenantEmail = intent.getStringExtra("tenantEmail");
+        tenantPhone = intent.getIntExtra("tenantPhone", 0);
+        tenantDateOfBirth = intent.getStringExtra("tenantDateOfBirth");
+    }
+
+    /**
+     * Find the controls in the tenant layout
+     */
+    private void findControls(){
+        etName = (EditText)findViewById(R.id.etName);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPhone =(EditText)findViewById(R.id.etPhone);
+        etDateofBirth = (EditText)findViewById(R.id.etDateofBirth);
+    }
+
+    /**
+     * Set the data to the controls
+     */
+    private void setControlData(){
+        etName.setText(tenantName);
+        etEmail.setText(tenantEmail);
+        etPhone.setText(""+tenantPhone);
+        etDateofBirth.setText(tenantDateOfBirth);
     }
 }

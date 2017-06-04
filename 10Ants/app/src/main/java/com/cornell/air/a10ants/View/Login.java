@@ -1,6 +1,7 @@
 package com.cornell.air.a10ants.View;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Login extends AppCompatActivity{
 
+    //Instance variables
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
     private static int SIGN_IN_REQUEST_CODE = 1;
     FrameLayout container_menu;
 

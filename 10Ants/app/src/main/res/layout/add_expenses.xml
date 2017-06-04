@@ -60,7 +60,7 @@
         android:layout_marginTop="10dp"/>
 
     <EditText
-        android:id="@+id/etPayTo"
+        android:id="@+id/etPaidTo"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvPaidTo"
@@ -74,7 +74,7 @@
         android:text="@string/paid_on"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etPayTo"
+        android:layout_below="@+id/etPaidTo"
         android:layout_width="wrap_content"
         android:textSize="15sp"
         android:layout_marginTop="10dp"/>

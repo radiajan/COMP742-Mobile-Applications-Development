@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,24 +34,35 @@ public class addExpense extends AppCompatActivity {
     Calendar myCalendar = Calendar.getInstance();
 
     //Instance controls
+    EditText etAmount;
+    Spinner  spExpense;
+    EditText etPaidTo;
     EditText etPaidOn;
+
+    //Variable Instance
+    String propertyId;
+    String expenseId;
+    String expenseAmount;
+    String expenseExpense;
+    String expensePaidTo;
+    String expensePaidOn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_expenses);
 
-        etPaidOn = (EditText) findViewById(R.id.etPaidOn);
-        etPaidOn.setOnClickListener(new View.OnClickListener() {
+        //Set the calendar object to the EditText control
+        setCalendarEvent();
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(addExpense.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        //Get data from intent object
+        getIntentData();
+
+        //Find controls in layout
+        findControls();
+
+        //Set values
+        setControlData();
     }
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -76,22 +88,29 @@ public class addExpense extends AppCompatActivity {
      * @param view
      */
     public void addExpense(View view){
-        //Get intent object
-        Intent intent = getIntent();
-        String propertyId = intent.getStringExtra("propertyId");
-
         //Set the values to the properties
         expense = new Expense();
+
+        //Check if the user is editing the property
+        if(expenseId != null)
+            expense.setId(expenseId);
+
         expense.setAmount(((EditText)findViewById(R.id.etAmount)).getText().toString());
         expense.setExpense(((Spinner)findViewById(R.id.spCategory)).getSelectedItem().toString());
-        expense.setPayTo(((EditText)findViewById(R.id.etPayTo)).getText().toString());
+        expense.setPaidTo(((EditText)findViewById(R.id.etPaidTo)).getText().toString());
         expense.setPaidOn(((EditText)findViewById(R.id.etPaidOn)).getText().toString());
 
         //Create the instance of the DAO object
         expenseDAL = new ExpenseDAL(propertyId);
 
         //Add the expense values
-        boolean isSaved = expenseDAL.addExpense(expense);
+        boolean isSaved;
+
+        //Add or edit expense
+        if(expenseId == null)
+            isSaved = expenseDAL.addExpense(expense);
+        else
+            isSaved = expenseDAL.editExpense(expense);
 
         //Display message
         if(isSaved) {
@@ -99,7 +118,64 @@ public class addExpense extends AppCompatActivity {
             finish();
         }
         else{
-            Toast.makeText(this, "Expense unsuccessfull", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Expense data not saved", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Set the calendar event to the EditText
+     */
+    private void setCalendarEvent(){
+        etPaidOn = (EditText) findViewById(R.id.etPaidOn);
+        etPaidOn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(addExpense.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
+    /**
+     * Get data from intent object
+     */
+    private void getIntentData(){
+        //Get intent object
+        Intent intent = getIntent();
+        propertyId = intent.getStringExtra("propertyId");
+        expenseId = intent.getStringExtra("expenseId");
+        expenseAmount = intent.getStringExtra("expenseAmount");
+        expenseExpense = intent.getStringExtra("expenseExpense");
+        expensePaidTo = intent.getStringExtra("expensePaidTo");
+        expensePaidOn = intent.getStringExtra("expensePaidOn");
+    }
+
+    /**
+     * Find the controls in the expense layout
+     */
+    private void findControls(){
+        etAmount = (EditText)findViewById(R.id.etAmount);
+        spExpense = (Spinner)findViewById(R.id.spCategory);
+        etPaidTo =(EditText)findViewById(R.id.etPaidTo);
+        etPaidOn = (EditText)findViewById(R.id.etPaidOn);
+    }
+
+    /**
+     * Set the data to the controls
+     */
+    private void setControlData(){
+        etAmount.setText(""+expenseAmount);
+        etPaidTo.setText(expensePaidTo);
+        etPaidOn.setText(expensePaidOn);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.expense_type, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spExpense.setAdapter(adapter);
+        if (expenseExpense!=null) {
+            int spinnerPosition = adapter.getPosition(expenseExpense);
+            spExpense.setSelection(spinnerPosition);
         }
     }
 }

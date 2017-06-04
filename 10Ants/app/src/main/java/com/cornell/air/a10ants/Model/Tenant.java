@@ -10,7 +10,6 @@ public class Tenant {
     private String email;
     private int phone;
     private String dateOfBirth;
-    private String property;
 
     public Tenant(){
 
@@ -22,7 +21,6 @@ public class Tenant {
         this.email = email;
         this.phone = phone;
         this.dateOfBirth = dateOfBirth;
-        this.property = property;
     }
 
     public String getId() {return id;}
@@ -39,7 +37,4 @@ public class Tenant {
 
     public String getDateOfBirth() {return dateOfBirth;}
     public void setDateOfBirth(String dateOfBirth) {this.dateOfBirth = dateOfBirth;}
-
-    public String getProperty() {return property;}
-    public void setProperty(String property) {this.property = property;}
 }

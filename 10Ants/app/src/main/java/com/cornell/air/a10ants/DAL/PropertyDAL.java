@@ -69,6 +69,30 @@ public class PropertyDAL {
     }
 
     /**
+     * Edit property data
+     * @param property
+     * @return condition
+     */
+    public boolean editProperty(Property property){
+        try {
+            if (isFieldEmpty(property))
+            {
+                //Edit item in database
+                database.child(property.getId()).setValue(property);
+
+                //Display message, included successfully
+                return true;
+            } else {
+                return false;
+            }
+        }catch(Exception e){
+            Log.e("Error: ", e.getMessage());
+        }
+
+        return true;
+    }
+
+    /**
      * List the properties
      */
     public void listProperty() {
@@ -94,6 +118,7 @@ public class PropertyDAL {
             }
         });
     }
+
 
     /**
      * Delete property
