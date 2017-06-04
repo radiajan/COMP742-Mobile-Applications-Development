@@ -1,8 +1,6 @@
 package com.cornell.air.a10ants.Fragments;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,33 +8,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.DAL.TenantDAL;
 import com.cornell.air.a10ants.Model.Property;
-import com.cornell.air.a10ants.Model.PropertyList;
 import com.cornell.air.a10ants.Model.Tenant;
 import com.cornell.air.a10ants.R;
 import com.cornell.air.a10ants.View.PropertyDetails;
 import com.cornell.air.a10ants.View.addProperty;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,18 +55,20 @@ public class OverviewFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         Button b = (Button) getView().findViewById(R.id.btnAddPropertyLandlord);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), addProperty.class);
-                startActivity(intent);
-            }
-        });
+        if(b != null) {
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), addProperty.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.f_overview, container, false);
+        View view = inflater.inflate(R.layout.f_overview_landlord, container, false);
 
         //Get user email data
         if(FirebaseAuth.getInstance().getCurrentUser() != null)
@@ -145,30 +133,8 @@ public class OverviewFragment extends Fragment {
             }
         });
 
-
-        //Create tabs for the Overview
-        CreateTab(view);
-
         //Return View to be injected
         return view;
-    }
-
-    //Create Tab name
-    private void CreateTab(View view){
-        TabHost tabs = (TabHost)view.findViewById(R.id.tabOverview);
-        tabs.setup();
-
-        //Create a tab for Landlords
-        TabHost.TabSpec landlordTab = tabs.newTabSpec("tabLandlord");
-        landlordTab.setContent(R.id.tabLandlord);
-        landlordTab.setIndicator("Landlord");
-        tabs.addTab(landlordTab);
-
-        //Create a tab for Tenants
-        TabHost.TabSpec tenantTab = tabs.newTabSpec("tabTenant");
-        tenantTab.setContent(R.id.tabTenant);
-        tenantTab.setIndicator("Tenant");
-        tabs.addTab(tenantTab);
     }
 
     /**
@@ -183,7 +149,7 @@ public class OverviewFragment extends Fragment {
         propertyDAL = new PropertyDAL(getActivity(), listViewPropertyLandlord, listProperty);
 
         //Fill the listview
-        propertyDAL.listProperty();
+        propertyDAL.listProperty(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         //Instantiate properties
         //tenantDAL = new TenantDAL(getActivity(), listViewPropertyTenant, listProperty);

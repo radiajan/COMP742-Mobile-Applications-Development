@@ -10,17 +10,19 @@ public class Tenant {
     private String email;
     private int phone;
     private String dateOfBirth;
+    private String propertyId;
 
     public Tenant(){
 
     }
 
-    public Tenant(String id, String name, String email, int phone, String dateOfBirth, String property){
+    public Tenant(String id, String name, String email, int phone, String dateOfBirth, String propertyId){
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.dateOfBirth = dateOfBirth;
+        this.propertyId = propertyId;
     }
 
     public String getId() {return id;}
@@ -37,4 +39,7 @@ public class Tenant {
 
     public String getDateOfBirth() {return dateOfBirth;}
     public void setDateOfBirth(String dateOfBirth) {this.dateOfBirth = dateOfBirth;}
+
+    public String getPropertyId() {return propertyId;}
+    public void setPropertyId(String propertyId) {this.propertyId = propertyId;}
 }

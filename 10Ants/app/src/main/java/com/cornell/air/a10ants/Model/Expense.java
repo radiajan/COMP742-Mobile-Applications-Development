@@ -12,17 +12,19 @@ public class Expense {
     private String expense;
     private String paidTo;
     private String paidOn;
+    private String propertyId;
 
     public Expense(){
 
     }
 
-    public Expense(String id ,String amount, String expense, String paidTo, String paidOn){
+    public Expense(String id ,String amount, String expense, String paidTo, String paidOn, String propertyId){
         this.id = id;
         this.amount = amount;
         this.expense = expense;
         this.paidTo = paidTo;
         this.paidOn = paidOn;
+        this.propertyId = propertyId;
     }
 
     public String getId() {return id;}
@@ -40,5 +42,6 @@ public class Expense {
     public String getPaidOn() {return paidOn;}
     public void setPaidOn(String paidOn) {this.paidOn = paidOn;}
 
-
+    public String getPropertyId() {return propertyId;}
+    public void setPropertyId(String propertyId) {this.propertyId = propertyId;}
 }

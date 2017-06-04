@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.Fragments.AboutFragment;
 import com.cornell.air.a10ants.Fragments.ChatFragment;
 import com.cornell.air.a10ants.Fragments.OverviewFragment;
@@ -128,6 +129,9 @@ public class MenuFrame extends AppCompatActivity {
                 if (menuItemId == R.id.menuOverview) {
                     OverviewFragment o = new OverviewFragment();
                     getFragmentManager().beginTransaction().replace(R.id.frame, o).commit();
+
+                    PropertyDAL propertyDAL = new PropertyDAL();
+                    propertyDAL.createTenantLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
                 }
                 //Redirects to Report menu
                 else if (menuItemId == R.id.menuReport) {

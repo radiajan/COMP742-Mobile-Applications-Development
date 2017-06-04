@@ -109,6 +109,7 @@ public class addTenant extends AppCompatActivity {
         tenant.setEmail(((EditText) findViewById(R.id.etEmail)).getText().toString());
         tenant.setPhone(Integer.parseInt(((EditText) findViewById(R.id.etPhone)).getText().toString()));
         tenant.setDateOfBirth(((EditText) findViewById(R.id.etDateofBirth)).getText().toString());
+        tenant.setPropertyId(propertyId);
 
         //Create the instance of the DAO object
         tenantDAL = new TenantDAL(propertyId);

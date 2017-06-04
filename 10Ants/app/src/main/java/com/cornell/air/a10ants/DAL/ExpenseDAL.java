@@ -32,12 +32,12 @@ public class ExpenseDAL {
 
     public ExpenseDAL(String propertyId){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("expenses");
     }
 
     public ExpenseDAL(String propertyId, Activity activity, ListView list, List<Expense> listExpense){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("expenses");
         this.activity = activity;
         this.list = list;
         this.listExpense = listExpense;

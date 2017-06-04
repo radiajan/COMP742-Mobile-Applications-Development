@@ -99,6 +99,7 @@ public class addExpense extends AppCompatActivity {
         expense.setExpense(((Spinner)findViewById(R.id.spCategory)).getSelectedItem().toString());
         expense.setPaidTo(((EditText)findViewById(R.id.etPaidTo)).getText().toString());
         expense.setPaidOn(((EditText)findViewById(R.id.etPaidOn)).getText().toString());
+        expense.setPropertyId(propertyId);
 
         //Create the instance of the DAO object
         expenseDAL = new ExpenseDAL(propertyId);

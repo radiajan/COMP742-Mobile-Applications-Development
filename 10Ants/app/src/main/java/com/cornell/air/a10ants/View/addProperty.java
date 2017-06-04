@@ -17,6 +17,7 @@ import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.Model.Expense;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -76,6 +77,7 @@ public class addProperty extends AppCompatActivity{
         property.setAddress(((EditText)findViewById(R.id.etAddress)).getText().toString());
         property.setDescription(((EditText)findViewById(R.id.etDescription)).getText().toString());
         property.setType(((Spinner)findViewById(R.id.spType)).getSelectedItem().toString());
+        property.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         //Create the instance of the DAO object
         propertyDAL = new PropertyDAL();

@@ -38,12 +38,12 @@ public class TenantDAL {
 
     public TenantDAL(String propertyId){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("tenants");
     }
 
     public TenantDAL(String propertyId, Activity activity, ListView list, List<Tenant> listTenant){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("tenants");
         this.activity = activity;
         this.list = list;
         this.listTenant = listTenant;
