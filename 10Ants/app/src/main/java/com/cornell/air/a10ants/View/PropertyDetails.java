@@ -201,6 +201,7 @@ public class PropertyDetails extends AppCompatActivity {
 
         //Instantiate properties
         tenantDAL = new TenantDAL(propertyId,PropertyDetails.this, lvTenant, listTenant);
+
         //Fill the listview
         tenantDAL.listTenant();
     }

@@ -36,6 +36,7 @@ public class TenantDAL {
     List<Property> listProperty;
     Activity activityProperty;
     ListView listPropertyDisplay;
+    String propertyId;
     View viewTenant;
 
     public TenantDAL(){
@@ -49,6 +50,7 @@ public class TenantDAL {
         this.activity = activity;
         this.list = list;
         this.listTenant = listTenant;
+        this.propertyId = propertyId;
     }
 
     public TenantDAL(Activity activity, ListView listPropertyDisplay, List<Property> listProperty){
@@ -128,7 +130,7 @@ public class TenantDAL {
      */
     public void listTenant(){
         //Fetch data for the expenses
-        database.addValueEventListener(new ValueEventListener() {
+        database.orderByChild("propertyId").equalTo(propertyId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Clears previous data
@@ -166,8 +168,10 @@ public class TenantDAL {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot propertySnap : dataSnapshot.getChildren()) {
                                 Property property = propertySnap.getValue(Property.class);
-                                ((TextView) viewTenant.findViewById(R.id.tvName)).setText(property.getName());
-                                ((TextView) viewTenant.findViewById(R.id.tvDescription )).setText(property.getDescription());
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewName)).setText("Name: " + property.getName());
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewDescription )).setText("Description: " + property.getDescription());
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewAddress)).setText("Address: " + property.getAddress());
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewEmail)).setText("Email: " + property.getEmail());
                             }
                         }
 

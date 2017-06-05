@@ -16,6 +16,7 @@ import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.Fragments.AboutFragment;
 import com.cornell.air.a10ants.Fragments.ChatFragment;
 import com.cornell.air.a10ants.Fragments.OverviewFragment;
+import com.cornell.air.a10ants.Fragments.OverviewTenant;
 import com.cornell.air.a10ants.Fragments.ReportFragment;
 import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
@@ -45,11 +46,6 @@ public class MenuFrame extends AppCompatActivity {
 
         //Create the BottomBar menu items
         setItemsFromMenu();
-
-        UserProfile.getPropertyId();
-        UserProfile.getUserEmail();
-        UserProfile.getUserName();
-        UserProfile.getUserProfile();
     }
 
     /**

@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.cornell.air.a10ants.DAL.LoginDAL;
 import com.cornell.air.a10ants.Menu.MenuFrame;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.Tenant;
@@ -40,15 +41,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONObject;
+
 public class Login extends AppCompatActivity{
 
     //Instance variables
     private static int SIGN_IN_REQUEST_CODE = 1;
+    LoginDAL loginDAL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Instance of DAL object
+        loginDAL = new LoginDAL();
+
+        //Check user authentication
         handleAuthentication();
     }
 
@@ -57,12 +65,13 @@ public class Login extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SIGN_IN_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                setUserProfile();
+                //Loads user profile
+                loginDAL.setUserProfile();
 
                 Toast.makeText(this, "User signed in!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
+                Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
                 finish();
-                //startActivity(intent);
+                startActivity(intent);
             } else {
                 // Something didn't work out. Let the user know and wait for them to sign in again
             }
@@ -74,45 +83,14 @@ public class Login extends AppCompatActivity{
         if (auth.getCurrentUser() != null) {
             //User is signed in already. You're good to go!
             Toast.makeText(this, "User signed in!", Toast.LENGTH_SHORT).show();
-            setUserProfile();
-            //Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
-            //startActivity(intent);
+
+            //Loads user profile
+            loginDAL.setUserProfile();
+
+            Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
+            startActivity(intent);
         } else {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setProviders(AuthUI.GOOGLE_PROVIDER).build(),SIGN_IN_REQUEST_CODE);
-        }
-    }
-
-    private void setUserProfile() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            FirebaseDatabase.getInstance().getReference("tenants").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot tenantSnap : dataSnapshot.getChildren()) {
-                        Tenant tenant = tenantSnap.getValue(Tenant.class);
-
-                        //Set User profile for tenants
-                        UserProfile.setUserEmail(tenant.getEmail());
-                        UserProfile.setUserName(tenant.getName());
-                        UserProfile.setPropertyId(tenant.getPropertyId());
-                        UserProfile.setUserProfile("tenant");
-                    }
-
-                    //Set User profile for landlord
-                    UserProfile.setUserEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                    UserProfile.setUserName(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-                    UserProfile.setPropertyId("");
-                    UserProfile.setUserProfile("landlord");
-
-                    //Creates the intent with the user profile
-                    Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
         }
     }
 }

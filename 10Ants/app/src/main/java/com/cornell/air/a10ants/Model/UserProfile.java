@@ -8,8 +8,9 @@ public class UserProfile {
     //Instance Variables
     private static String userName;
     private static String userEmail;
-    private static String propertyId;
     private static String userProfile;
+    private static String propertyId;
+    private static String propertyName;
 
     //Getters and setters
     public static String getUserName() {return userName;}
@@ -24,5 +25,6 @@ public class UserProfile {
     public static String getUserProfile() {return userProfile;}
     public static void setUserProfile(String userProfile) {UserProfile.userProfile = userProfile;}
 
-
+    public static String getPropertyName() {return propertyName;}
+    public static void setPropertyName(String propertyName) {UserProfile.propertyName = propertyName;}
 }

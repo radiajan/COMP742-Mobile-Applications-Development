@@ -30,6 +30,10 @@
     <string name="select_property">Select Property</string>
     <string name = "select_expense">Select Expense</string>
     <string name="property_type">Property Type</string>
+    <string name="property_name">Name:</string>
+    <string name="property_address">Address:</string>
+    <string name="property_description">Description:</string>
+    <string name="property_email">Email:</string>
 
     <array name="property_type">
         <item>House</item>
