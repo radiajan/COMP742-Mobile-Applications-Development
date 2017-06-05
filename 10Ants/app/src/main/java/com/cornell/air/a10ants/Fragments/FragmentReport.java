@@ -18,7 +18,7 @@ import com.cornell.air.a10ants.View.addProperty;
  * Created by root on 8/05/17.
  */
 
-public class ReportFragment extends Fragment {
+public class FragmentReport extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)

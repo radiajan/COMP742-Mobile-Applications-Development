@@ -24,7 +24,7 @@ import java.util.List;
  * Created by massami on 5/06/2017.
  */
 
-public class OverviewTenant extends Fragment{
+public class FragmentOverviewTenant extends Fragment{
     //Declare variables
     TenantDAL tenantDAL;
     ListView listViewTenant;
@@ -53,5 +53,4 @@ public class OverviewTenant extends Fragment{
         //Fill the listview
         tenantDAL.listTenant();
     }
-
 }

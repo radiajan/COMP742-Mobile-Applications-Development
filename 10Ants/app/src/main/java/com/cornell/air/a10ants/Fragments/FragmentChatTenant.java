@@ -26,7 +26,7 @@ import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
  * Created by root on 8/05/17.
  */
 
-public class ChatFragment extends Fragment{
+public class FragmentChatTenant extends Fragment{
     private FirebaseListAdapter<ChatMessage> adapter;
     RelativeLayout activity_main;
 
@@ -40,7 +40,7 @@ public class ChatFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.main_chat, container, false);
+        View view = inflater.inflate(R.layout.main_chat_tenant, container, false);
         activity_main = (RelativeLayout)view.findViewById(R.id.activity_main);
 
         displayChatMessage(view);

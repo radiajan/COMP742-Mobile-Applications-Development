@@ -12,7 +12,7 @@ import com.cornell.air.a10ants.R;
  * Created by root on 8/05/17.
  */
 
-public class AboutFragment extends Fragment {
+public class FragmentAbout extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.f_about, container, false);

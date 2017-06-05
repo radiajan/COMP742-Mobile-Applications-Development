@@ -31,7 +31,7 @@ import java.util.List;
  * Created by root on 7/05/17.
  */
 
-public class OverviewFragment extends Fragment {
+public class FragmentOverviewLandlord extends Fragment {
 
     //Reference to the property database
     DatabaseReference databaseProperty;
