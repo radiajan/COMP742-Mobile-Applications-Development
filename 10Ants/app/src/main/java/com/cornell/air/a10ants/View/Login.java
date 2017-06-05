@@ -15,6 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.cornell.air.a10ants.Menu.MenuFrame;
+import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.Tenant;
+import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.Auth;
@@ -31,52 +34,35 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity{
 
     //Instance variables
     private static int SIGN_IN_REQUEST_CODE = 1;
-    FrameLayout container_menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //container_menu = (FrameLayout)findViewById(R.id.container_menu);
+
         handleAuthentication();
-        //setContentView(R.layout.container_menu);
     }
-
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menu_sign_out)
-        {
-            AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(getBaseContext(), "User signed out!", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            });
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_login,menu);
-        return super.onCreateOptionsMenu(menu);
-        //return true;
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SIGN_IN_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                setUserProfile();
+
                 Toast.makeText(this, "User signed in!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
+                //Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
                 finish();
-                startActivity(intent);
+                //startActivity(intent);
             } else {
                 // Something didn't work out. Let the user know and wait for them to sign in again
             }
@@ -88,10 +74,45 @@ public class Login extends AppCompatActivity{
         if (auth.getCurrentUser() != null) {
             //User is signed in already. You're good to go!
             Toast.makeText(this, "User signed in!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
-            startActivity(intent);
+            setUserProfile();
+            //Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
+            //startActivity(intent);
         } else {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setProviders(AuthUI.GOOGLE_PROVIDER).build(),SIGN_IN_REQUEST_CODE);
+        }
+    }
+
+    private void setUserProfile() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            FirebaseDatabase.getInstance().getReference("tenants").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot tenantSnap : dataSnapshot.getChildren()) {
+                        Tenant tenant = tenantSnap.getValue(Tenant.class);
+
+                        //Set User profile for tenants
+                        UserProfile.setUserEmail(tenant.getEmail());
+                        UserProfile.setUserName(tenant.getName());
+                        UserProfile.setPropertyId(tenant.getPropertyId());
+                        UserProfile.setUserProfile("tenant");
+                    }
+
+                    //Set User profile for landlord
+                    UserProfile.setUserEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                    UserProfile.setUserName(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                    UserProfile.setPropertyId("");
+                    UserProfile.setUserProfile("landlord");
+
+                    //Creates the intent with the user profile
+                    Intent intent = new Intent(getApplicationContext() ,MenuFrame.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 }

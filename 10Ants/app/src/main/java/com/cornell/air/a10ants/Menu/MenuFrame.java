@@ -17,6 +17,7 @@ import com.cornell.air.a10ants.Fragments.AboutFragment;
 import com.cornell.air.a10ants.Fragments.ChatFragment;
 import com.cornell.air.a10ants.Fragments.OverviewFragment;
 import com.cornell.air.a10ants.Fragments.ReportFragment;
+import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,22 +37,26 @@ public class MenuFrame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         container_menu = (FrameLayout)findViewById(R.id.container_menu);
-        //handleAuthentication();
         setContentView(R.layout.container_menu);
+
         //Attach context to Bottombar
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
         //Create the BottomBar menu items
         setItemsFromMenu();
 
-        //Adds badge to Bottombar menu item
-        /*BottomBarBadge unread;
-        unread = mBottomBar.makeBadgeForTabAt(2,"#FF0000",5);
-        unread.show();*/
+        UserProfile.getPropertyId();
+        UserProfile.getUserEmail();
+        UserProfile.getUserName();
+        UserProfile.getUserProfile();
     }
 
+    /**
+     * execute the option to signout
+     * @param item menu item
+     * @return if user logout
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.menu_sign_out)
@@ -67,12 +72,21 @@ public class MenuFrame extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Creates the menu items
+     * @param menu objecto to ve inflated
+     * @return create menu successful
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_login,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Save the state of the menu item
+     * @param outState object to save the menu option
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
