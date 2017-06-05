@@ -1,5 +1,7 @@
 package com.cornell.air.a10ants.Menu;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -28,8 +30,6 @@ public class MenuFrame extends AppCompatActivity {
     private static int SIGN_IN_REQUEST_CODE = 1;
     FrameLayout container_menu;
 
-    //FIREBASE instance variables
-
     //BOTTOMBAR instance variables
     BottomBar mBottomBar;
 
@@ -38,7 +38,7 @@ public class MenuFrame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         container_menu = (FrameLayout)findViewById(R.id.container_menu);
-        handleAuthentication();
+        //handleAuthentication();
         setContentView(R.layout.container_menu);
         //Attach context to Bottombar
         mBottomBar = BottomBar.attach(this, savedInstanceState);
@@ -50,37 +50,6 @@ public class MenuFrame extends AppCompatActivity {
         /*BottomBarBadge unread;
         unread = mBottomBar.makeBadgeForTabAt(2,"#FF0000",5);
         unread.show();*/
-    }
-
-    private void handleAuthentication() {
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-
-        if (auth.getCurrentUser() != null) {
-
-            //User is signed in already. You're good to go!
-            Toast.makeText(this, "User signed in!", Toast.LENGTH_SHORT).show();
-
-        } else {
-
-            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setProviders(AuthUI.GOOGLE_PROVIDER).build(),SIGN_IN_REQUEST_CODE);
-
-        }
-
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == SIGN_IN_REQUEST_CODE) {
-
-            if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "User signed in!", Toast.LENGTH_SHORT).show();
-            } else {
-                // Something didn't work out. Let the user know and wait for them to sign in again
-            }
-        }
     }
 
     @Override

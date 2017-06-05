@@ -36,17 +36,10 @@ public class OverviewFragment extends Fragment {
     //Reference to the property database
     DatabaseReference databaseProperty;
     ListView listViewPropertyLandlord;
-    ListView listViewPropertyTenant;
     List<Property> listProperty;
     Property property;
     PropertyDAL propertyDAL;
-    Tenant tenant;
-    TenantDAL tenantDAL;
     String email;
-
-    //Instance variables
-    public static final String MY_PREFS_NAME = "MyPrefsFile";
-    String personEmail;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
@@ -150,12 +143,5 @@ public class OverviewFragment extends Fragment {
 
         //Fill the listview
         propertyDAL.listProperty(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-
-        //Instantiate properties
-        //tenantDAL = new TenantDAL(getActivity(), listViewPropertyTenant, listProperty);
-
-        //Fill the listview
-        /*if(email != null)
-            tenantDAL.listTenantProperty(email);*/
     }
 }

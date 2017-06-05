@@ -123,7 +123,7 @@ public class PropertyDetails extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         //Delete selected item
                         if(item.getTitle().equals("Delete")) {
-                            tenantDAL = new TenantDAL(propertyId);
+                            tenantDAL = new TenantDAL();
                             tenantDAL.deleteTenant(tenant.getId());
                         }
                         else if (item.getTitle().equals("Edit")) {

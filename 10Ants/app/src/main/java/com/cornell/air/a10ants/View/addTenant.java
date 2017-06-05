@@ -112,7 +112,7 @@ public class addTenant extends AppCompatActivity {
         tenant.setPropertyId(propertyId);
 
         //Create the instance of the DAO object
-        tenantDAL = new TenantDAL(propertyId);
+        tenantDAL = new TenantDAL();
 
         //Add the expense values
         boolean isSaved;
