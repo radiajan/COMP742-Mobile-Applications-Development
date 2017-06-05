@@ -7,6 +7,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cornell.air.a10ants.Model.ChatMessage;
+import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ public class ChatMessageDAL {
 
     public ChatMessageDAL(){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("messages");
+        database = FirebaseDatabase.getInstance().getReference("messages").child(UserProfile.getPropertyId().toString()+"-messages");
     }
 
     public ChatMessageDAL(String propertyId){
@@ -35,6 +36,6 @@ public class ChatMessageDAL {
     }
 
     public void addMessage(String text){
-        database.push().setValue(new ChatMessage(text, FirebaseAuth.getInstance().getCurrentUser().getEmail()));
+        database.push().setValue(new ChatMessage(text, FirebaseAuth.getInstance().getCurrentUser().getDisplayName()));
     }
 }
