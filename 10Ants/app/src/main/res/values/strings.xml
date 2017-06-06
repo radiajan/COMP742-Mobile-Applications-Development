@@ -6,7 +6,7 @@
     <string name="help">Help and FAQ</string>
     <string name="terms_conditions">Terms and Conditions</string>
     <string name="feedback">Feedback</string>
-    <string name="email">Send Email</string>
+    <string name="email">Email</string>
     <string name="recommend_friends">Recommend to Friends</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
@@ -24,9 +24,9 @@
     <string name="information_property">Property Information</string>
     <string name="information_tenant">Tenant Information</string>
     <string name="information_expense">Expense Information</string>
-    <string name="add_property">Add Property</string>
-    <string name="add_expense">Add Expense</string>
-    <string name="add_tenant">Add Tenant</string>
+    <string name="add_property">Save Property</string>
+    <string name="add_expense">Save Expense</string>
+    <string name="add_tenant">Save Tenant</string>
     <string name="select_property">Select Property</string>
     <string name = "select_expense">Select Expense</string>
     <string name="property_type">Property Type</string>
