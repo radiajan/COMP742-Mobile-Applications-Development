@@ -11,18 +11,16 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cornell.air.a10ants.DAL.ChatMessageDAL;
+import com.cornell.air.a10ants.Model.ChatMessage;
+import com.cornell.air.a10ants.Model.UserProfile;
+import com.cornell.air.a10ants.R;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.FirebaseDatabase;
+
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
-
-import com.cornell.air.a10ants.DAL.ChatMessageDAL;
-import com.cornell.air.a10ants.Model.ChatMessage;
-import com.cornell.air.a10ants.R;
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by root on 8/05/17.
@@ -69,7 +67,7 @@ public class ChatFragment extends Fragment{
     private void displayChatMessage(View view) {
 
         ListView listOfMessage = (ListView)view.findViewById(R.id.list_of_message);
-        adapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.custom_list_chat, FirebaseDatabase.getInstance().getReference("messages"))
+        adapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.custom_list_chat, FirebaseDatabase.getInstance().getReference("messages").child(UserProfile.getPropertyId().toString()+"-messages"))
         {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
@@ -87,5 +85,7 @@ public class ChatFragment extends Fragment{
             }
         };
         listOfMessage.setAdapter(adapter);
+        listOfMessage.setSelection(listOfMessage.getAdapter().getCount()-1);
+
     }
 }
