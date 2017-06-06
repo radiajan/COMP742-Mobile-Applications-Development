@@ -9,16 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.cornell.air.a10ants.R;
-import com.cornell.air.a10ants.ReportAttachment.AttachExpense;
 import com.cornell.air.a10ants.ReportAttachment.AttachReceipt;
 import com.cornell.air.a10ants.ReportAttachment.AttachReport;
-import com.cornell.air.a10ants.View.addProperty;
 
 /**
  * Created by root on 8/05/17.
  */
 
-public class FragmentReport extends Fragment {
+public class FragmentReportTenant extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
@@ -29,7 +27,7 @@ public class FragmentReport extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.f_report, container, false);
+        View view = inflater.inflate(R.layout.f_report_tenant, container, false);
 
         Button btnReceipt = (Button) view.findViewById(R.id.btnReceipt);
         btnReceipt.setOnClickListener(new View.OnClickListener() {

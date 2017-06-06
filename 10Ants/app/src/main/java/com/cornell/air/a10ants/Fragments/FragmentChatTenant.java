@@ -33,7 +33,6 @@ public class FragmentChatTenant extends Fragment{
     //Add Emojicon
     EmojiconEditText emojiconEditText;
     ImageView emojiButton,submitButton;
-    EmojIconActions emojIconActions;
 
     //Class reference
     ChatMessageDAL chatMessageDAL;
