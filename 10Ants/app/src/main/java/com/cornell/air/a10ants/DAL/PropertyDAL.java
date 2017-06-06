@@ -1,14 +1,21 @@
 package com.cornell.air.a10ants.DAL;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cornell.air.a10ants.Fragments.OverviewFragment;
+import com.cornell.air.a10ants.Fragments.OverviewTenant;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.PropertyList;
+import com.cornell.air.a10ants.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +35,9 @@ public class PropertyDAL {
     List<Property> listProperty;
     Activity activityProperty;
     ListView listPropertyDisplay;
+    String emailDAL;
+    FragmentManager fm;
+
 
     public PropertyDAL(){
         //Create instance of the property node
@@ -69,10 +79,34 @@ public class PropertyDAL {
     }
 
     /**
+     * Edit property data
+     * @param property
+     * @return condition
+     */
+    public boolean editProperty(Property property){
+        try {
+            if (isFieldEmpty(property))
+            {
+                //Edit item in database
+                database.child(property.getId()).setValue(property);
+
+                //Display message, included successfully
+                return true;
+            } else {
+                return false;
+            }
+        }catch(Exception e){
+            Log.e("Error: ", e.getMessage());
+        }
+
+        return true;
+    }
+
+    /**
      * List the properties
      */
-    public void listProperty() {
-        database.addValueEventListener(new ValueEventListener() {
+    public void listProperty(String email) {
+        database.orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Clears previous data
@@ -94,6 +128,7 @@ public class PropertyDAL {
             }
         });
     }
+
 
     /**
      * Delete property
@@ -120,4 +155,34 @@ public class PropertyDAL {
             return false;
         }
     }
+
+    public void createTenantLayout(String email, FragmentManager fmr)
+    {
+        //Set value to variables
+        database = FirebaseDatabase.getInstance().getReference("tenants");
+        fm = fmr;
+        emailDAL = email;
+
+        database.orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Add property to the list
+                for (DataSnapshot propertySnapshot : dataSnapshot.getChildren()) {
+                    Property property = propertySnapshot.getValue(Property.class);
+
+                    //Its the tenant
+                    if(property.getEmail().equals(emailDAL)) {
+                        OverviewTenant t = new OverviewTenant();
+                        fm.beginTransaction().replace(R.id.frame, t).commit();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

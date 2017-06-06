@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <TableRow
+            android:id="@+id/trPropertyInfo"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary">
+                <TextView
+                    android:text="@string/information_property"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15sp"/>
+        </TableRow>
+
+        <TextView
+            android:id="@+id/tvOverviewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@+id/trPropertyInfo"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvOverviewAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@+id/tvOverviewName"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvOverviewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@+id/tvOverviewAddress"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvOverviewEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@+id/tvOverviewDescription"
+            android:textSize="15sp"/>
+
+        <TableRow
+            android:id="@+id/trTenants"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/tvOverviewEmail"
+            android:background="@color/colorPrimary">
+                <TextView
+                    android:text="@string/tenants"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15sp"/>
+        </TableRow>
+        <ListView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/listViewTenant"
+            android:layout_below="@+id/trTenants">
+        </ListView>
+
+</RelativeLayout>

@@ -16,6 +16,16 @@ public class Property{
     private String description;
     private String type;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
+
     public Property(){
 
     }

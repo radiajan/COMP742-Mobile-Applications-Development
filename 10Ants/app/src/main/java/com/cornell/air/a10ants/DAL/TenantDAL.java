@@ -3,16 +3,22 @@ package com.cornell.air.a10ants.DAL;
 import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cornell.air.a10ants.Model.Expense;
 import com.cornell.air.a10ants.Model.ExpenseList;
+import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.PropertyList;
 import com.cornell.air.a10ants.Model.Tenant;
 import com.cornell.air.a10ants.Model.TenantList;
+import com.cornell.air.a10ants.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
@@ -27,18 +33,31 @@ public class TenantDAL {
     Activity activity;
     ListView list;
     List<Tenant> listTenant;
+    List<Property> listProperty;
+    Activity activityProperty;
+    ListView listPropertyDisplay;
+    String propertyId;
+    View viewTenant;
 
-    public TenantDAL(String propertyId){
+    public TenantDAL(){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("tenants");
     }
 
     public TenantDAL(String propertyId, Activity activity, ListView list, List<Tenant> listTenant){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("tenants").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("tenants");
         this.activity = activity;
         this.list = list;
         this.listTenant = listTenant;
+        this.propertyId = propertyId;
+    }
+
+    public TenantDAL(Activity activity, ListView listPropertyDisplay, List<Property> listProperty){
+        database = FirebaseDatabase.getInstance().getReference("properties");
+        this.activityProperty = activity;
+        this.listPropertyDisplay = listPropertyDisplay;
+        this.listProperty = listProperty;
     }
 
     /**
@@ -72,6 +91,33 @@ public class TenantDAL {
     }
 
     /**
+     * Add the validations of the controls
+     * @param tenant
+     */
+    public boolean editTenant(Tenant tenant)
+    {
+        try{
+            if(isFieldEmpty(tenant))
+            {
+                //Includes item in database
+                database.child(tenant.getId()).setValue(tenant);
+
+                //Successfull
+                return true;
+            }
+            else
+            {
+                //Empty field
+                return false;
+            }
+        }catch(Exception e){
+            Log.e("Error: ",e.getMessage());
+        }
+
+        return true;
+    }
+
+    /**
      * Delete tenant
      * @param id
      */
@@ -84,7 +130,7 @@ public class TenantDAL {
      */
     public void listTenant(){
         //Fetch data for the expenses
-        database.addValueEventListener(new ValueEventListener() {
+        database.orderByChild("propertyId").equalTo(propertyId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Clears previous data
@@ -107,6 +153,43 @@ public class TenantDAL {
         });
     }
 
+    public void getProperty(String email,View view){
+        //Set the view content
+        viewTenant = view;
+
+        database.orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot tenantSnap : dataSnapshot.getChildren()) {
+                    Tenant tenant = tenantSnap.getValue(Tenant.class);
+
+                    FirebaseDatabase.getInstance().getReference("properties").orderByKey().equalTo(tenant.getPropertyId()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot propertySnap : dataSnapshot.getChildren()) {
+                                Property property = propertySnap.getValue(Property.class);
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewName)).setText("Name: " + property.getName());
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewDescription )).setText("Description: " + property.getDescription());
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewAddress)).setText("Address: " + property.getAddress());
+                                ((TextView) viewTenant.findViewById(R.id.tvOverviewEmail)).setText("Email: " + property.getEmail());
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     /**
      * Check if the field if empty
      * @return validation
@@ -115,7 +198,6 @@ public class TenantDAL {
         if(!TextUtils.isEmpty(tenant.getName()) &&
                 !TextUtils.isEmpty(tenant.getDateOfBirth()) &&
                 !TextUtils.isEmpty(tenant.getEmail()) &&
-                !TextUtils.isEmpty(tenant.getProperty()) &&
                 tenant.getPhone() != 0)
         {
             return true;

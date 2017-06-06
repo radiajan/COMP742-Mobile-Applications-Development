@@ -32,15 +32,42 @@ public class ExpenseDAL {
 
     public ExpenseDAL(String propertyId){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("expenses");
     }
 
     public ExpenseDAL(String propertyId, Activity activity, ListView list, List<Expense> listExpense){
         //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("expenses").child(propertyId);
+        database = FirebaseDatabase.getInstance().getReference("expenses");
         this.activity = activity;
         this.list = list;
         this.listExpense = listExpense;
+    }
+
+    /**
+     * Edit the validations of the controls
+     * @param expense
+     */
+    public boolean editExpense(Expense expense)
+    {
+        try{
+            if(isFieldEmpty(expense))
+            {
+                //Includes item in database
+                database.child(expense.getId()).setValue(expense);
+
+                //Successfull
+                return true;
+            }
+            else
+            {
+                //Empty field
+                return false;
+            }
+        }catch(Exception e){
+            Log.e("Error: ",e.getMessage());
+        }
+
+        return true;
     }
 
     /**
@@ -115,10 +142,10 @@ public class ExpenseDAL {
      * @return validation
      */
     private boolean isFieldEmpty(Expense expense){
-        if(!TextUtils.isEmpty(expense.getAmount()) &&
-           !TextUtils.isEmpty(expense.getExpense()) &&
+        if(!TextUtils.isEmpty(expense.getExpense()) &&
            !TextUtils.isEmpty(expense.getPaidOn()) &&
-           !TextUtils.isEmpty(expense.getPayTo()))
+           !TextUtils.isEmpty(expense.getPaidTo()) &&
+           !TextUtils.isEmpty(expense.getAmount()))
         {
             return true;
         }
