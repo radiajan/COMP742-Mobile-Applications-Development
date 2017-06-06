@@ -66,6 +66,7 @@ public class AttachReceipt extends AppCompatActivity{
     ImageView mImageView;
     boolean isDisplaying;
     Button buttonPick;
+    String type;
 
     /** Called when the activity is first created. */
     @Override
@@ -76,8 +77,11 @@ public class AttachReceipt extends AppCompatActivity{
         //Set storage reference
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        //Set the type of report
+        type = "receipt";
+
         //Instance
-        reportDAL = new ReportDAL();
+        reportDAL = new ReportDAL(type);
         report = new Report();
 
         //Find the controls of the layout
@@ -96,10 +100,10 @@ public class AttachReceipt extends AppCompatActivity{
         super.onStart();
 
         //Instantiate properties
-        reportDAL = new ReportDAL(this, lvReceipt, listReport);
+        reportDAL = new ReportDAL(type,this, lvReceipt, listReport);
 
         //Fill the listview
-        reportDAL.listReceipt(UserProfile.getPropertyId());
+        reportDAL.listReport(UserProfile.getPropertyId());
     }
 
     /**
@@ -131,7 +135,7 @@ public class AttachReceipt extends AppCompatActivity{
             String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
             //Set the file reference
-            StorageReference riversRef = storageReference.child(UserProfile.getPropertyId().toString() + "-receipt/" + currentDateTimeString + ".jpg");
+            StorageReference riversRef = storageReference.child(UserProfile.getPropertyId().toString() + "-receipts/" + currentDateTimeString + ".jpg");
 
             //Add report info to database
             report.setName(currentDateTimeString);
@@ -189,14 +193,9 @@ public class AttachReceipt extends AppCompatActivity{
 
         try {
             localFile = File.createTempFile("images", "jpg");
-            FirebaseStorage.getInstance().getReferenceFromUrl("gs://ants-b4737.appspot.com/"+ UserProfile.getPropertyId() + "-receipt/").child(nameFile + ".jpg").getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>(){
+            FirebaseStorage.getInstance().getReferenceFromUrl("gs://ants-b4737.appspot.com/"+ UserProfile.getPropertyId() + "-receipts/").child(nameFile + ".jpg").getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>(){
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    /*Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(localFile), "image*//*");
-                    startActivity(intent);*/
-
                     Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                     mImageView.setImageBitmap(bitmap);
                     isDisplaying = true;
@@ -247,10 +246,6 @@ public class AttachReceipt extends AppCompatActivity{
         lvReceipt = (ListView)findViewById(R.id.lvReceipt);
         listReport = new ArrayList<>();
     }
-
-
-
-
 }
 
 

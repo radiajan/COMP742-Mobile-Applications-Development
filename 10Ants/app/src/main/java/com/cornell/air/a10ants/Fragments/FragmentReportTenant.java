@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.cornell.air.a10ants.R;
+import com.cornell.air.a10ants.ReportAttachment.AttachExpense;
 import com.cornell.air.a10ants.ReportAttachment.AttachReceipt;
 import com.cornell.air.a10ants.ReportAttachment.AttachReport;
 
@@ -42,7 +43,7 @@ public class FragmentReportTenant extends Fragment {
         btnExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AttachReceipt.class);
+                Intent intent = new Intent(v.getContext(), AttachExpense.class);
                 startActivity(intent);
             }
         });

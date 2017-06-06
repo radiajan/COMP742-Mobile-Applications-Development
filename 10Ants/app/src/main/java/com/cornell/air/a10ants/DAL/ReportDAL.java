@@ -40,12 +40,23 @@ public class ReportDAL {
     ListView listReportDisplay;
 
     public ReportDAL(){
-        //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("receipts").child(UserProfile.getPropertyId().toString()+"-receipts");
+
     }
 
-    public ReportDAL(Activity activity, ListView listReportDisplay, List<Report> listReport){
-        database = FirebaseDatabase.getInstance().getReference("receipts").child(UserProfile.getPropertyId() + "-receipts");
+    public ReportDAL(String type){
+        if(type == "receipt") {
+            database = FirebaseDatabase.getInstance().getReference("report-receipts").child(UserProfile.getPropertyId().toString() + "-receipts");
+        }else {
+            database = FirebaseDatabase.getInstance().getReference("report-expenses").child(UserProfile.getPropertyId().toString() + "-expenses");
+        }
+    }
+
+    public ReportDAL(String type, Activity activity, ListView listReportDisplay, List<Report> listReport){
+        if(type == "receipt")
+            database = FirebaseDatabase.getInstance().getReference("report-receipts").child(UserProfile.getPropertyId() + "-receipts");
+        else
+            database = FirebaseDatabase.getInstance().getReference("report-expenses").child(UserProfile.getPropertyId() + "-expenses");
+
         this.activityReport = activity;
         this.listReportDisplay = listReportDisplay;
         this.listReport = listReport;
@@ -105,7 +116,7 @@ public class ReportDAL {
     /**
      * List the properties
      */
-    public void listReceipt(String propertyId) {
+    public void listReport(String propertyId) {
         database.orderByChild("propertyId").equalTo(propertyId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
