@@ -93,4 +93,11 @@ public class Login extends AppCompatActivity{
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setProviders(AuthUI.GOOGLE_PROVIDER).build(),SIGN_IN_REQUEST_CODE);
         }
     }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+
+        finish();
+    }
 }

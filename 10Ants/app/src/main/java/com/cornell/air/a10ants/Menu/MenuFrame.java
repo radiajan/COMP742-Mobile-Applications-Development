@@ -1,8 +1,5 @@
 package com.cornell.air.a10ants.Menu;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -12,13 +9,13 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.cornell.air.a10ants.DAL.ChatMessageDAL;
 import com.cornell.air.a10ants.DAL.PropertyDAL;
-import com.cornell.air.a10ants.Fragments.AboutFragment;
-import com.cornell.air.a10ants.Fragments.ChatFragment;
-import com.cornell.air.a10ants.Fragments.OverviewFragment;
-import com.cornell.air.a10ants.Fragments.OverviewTenant;
-import com.cornell.air.a10ants.Fragments.ReportFragment;
-import com.cornell.air.a10ants.Model.UserProfile;
+import com.cornell.air.a10ants.Fragments.FragmentAbout;
+import com.cornell.air.a10ants.Fragments.FragmentChatLandlord;
+import com.cornell.air.a10ants.Fragments.FragmentChatTenant;
+import com.cornell.air.a10ants.Fragments.FragmentOverviewLandlord;
+import com.cornell.air.a10ants.Fragments.FragmentReport;
 import com.cornell.air.a10ants.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -100,7 +97,7 @@ public class MenuFrame extends AppCompatActivity {
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 //Redirects to Overview menu
                 if (menuItemId == R.id.menuOverview) {
-                    OverviewFragment o = new OverviewFragment();
+                    FragmentOverviewLandlord o = new FragmentOverviewLandlord();
                     getFragmentManager().beginTransaction().replace(R.id.frame, o).commit();
 
                     PropertyDAL propertyDAL = new PropertyDAL();
@@ -108,17 +105,20 @@ public class MenuFrame extends AppCompatActivity {
                 }
                 //Redirects to Report menu
                 else if (menuItemId == R.id.menuReport) {
-                    ReportFragment rep = new ReportFragment();
+                    FragmentReport rep = new FragmentReport();
                     getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
                 }
                 //Redirects to Chat menu
                 else if (menuItemId == R.id.menuChat) {
-                    ChatFragment c = new ChatFragment();
+                    FragmentChatLandlord c = new FragmentChatLandlord();
                     getFragmentManager().beginTransaction().replace(R.id.frame, c).commit();
+
+                    ChatMessageDAL chatMessageDAL = new ChatMessageDAL();
+                    chatMessageDAL.createChatLandlordLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
                 }
                 //Redirects to About menu
                 else if (menuItemId == R.id.menuAbout) {
-                    AboutFragment a = new AboutFragment();
+                    FragmentAbout a = new FragmentAbout();
                     getFragmentManager().beginTransaction().replace(R.id.frame, a).commit();
                 }
             }
@@ -127,6 +127,13 @@ public class MenuFrame extends AppCompatActivity {
             public void onMenuTabReSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.menuOverview) {
                     // The user reselected item number one, scroll your content to top.
+                }
+                else if (menuItemId == R.id.menuChat){
+                    FragmentChatLandlord c = new FragmentChatLandlord();
+                    getFragmentManager().beginTransaction().addToBackStack("landlordChat").replace(R.id.frame, c).commit();
+
+                    ChatMessageDAL chatMessageDAL = new ChatMessageDAL();
+                    chatMessageDAL.createChatLandlordLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
                 }
             }
         });

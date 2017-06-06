@@ -1,18 +1,13 @@
 package com.cornell.air.a10ants.DAL;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.cornell.air.a10ants.Fragments.OverviewFragment;
-import com.cornell.air.a10ants.Fragments.OverviewTenant;
+import com.cornell.air.a10ants.Fragments.FragmentOverviewTenant;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.PropertyList;
 import com.cornell.air.a10ants.R;
@@ -22,7 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -172,7 +166,7 @@ public class PropertyDAL {
 
                     //Its the tenant
                     if(property.getEmail().equals(emailDAL)) {
-                        OverviewTenant t = new OverviewTenant();
+                        FragmentOverviewTenant t = new FragmentOverviewTenant();
                         fm.beginTransaction().replace(R.id.frame, t).commit();
                     }
                 }
@@ -184,5 +178,4 @@ public class PropertyDAL {
             }
         });
     }
-
 }
