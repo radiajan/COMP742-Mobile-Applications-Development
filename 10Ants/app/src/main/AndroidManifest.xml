@@ -29,6 +29,8 @@
         <activity android:name=".View.addTenant"></activity>
         <activity android:name=".ReportAttachment.AttachReceipt"></activity>
         <activity android:name=".ReportAttachment.AttachExpense"></activity>
-        <activity android:name=".ReportAttachment.AttachReport"></activity>
+        <activity android:name=".ReportAttachment.ReportTenant"></activity>
+        <activity android:name=".View.ReportIssueLandlord"></activity>
+        <activity android:name=".View.ReportDetails"></activity>
     </application>
 </manifest>

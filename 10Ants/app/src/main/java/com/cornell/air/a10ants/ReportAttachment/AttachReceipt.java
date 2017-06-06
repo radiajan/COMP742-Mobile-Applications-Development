@@ -1,13 +1,9 @@
 package com.cornell.air.a10ants.ReportAttachment;
 
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,24 +14,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cornell.air.a10ants.DAL.PropertyDAL;
-import com.cornell.air.a10ants.DAL.ReportDAL;
-import com.cornell.air.a10ants.Model.ChatMessage;
-import com.cornell.air.a10ants.Model.Property;
-import com.cornell.air.a10ants.Model.Report;
+import com.cornell.air.a10ants.DAL.AttachDAL;
+import com.cornell.air.a10ants.Model.Attach;
 import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
-import com.cornell.air.a10ants.View.PropertyDetails;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -44,7 +30,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,10 +44,10 @@ public class AttachReceipt extends AppCompatActivity{
     private static final int PICKFILE_RESULT_CODE = 1;
     private StorageReference storageReference;
     Uri filePath;
-    ReportDAL reportDAL;
-    Report report;
+    AttachDAL attachDAL;
+    Attach attach;
     ListView lvReceipt;
-    List<Report> listReport;
+    List<Attach> listAttach;
     ImageView mImageView;
     boolean isDisplaying;
     Button buttonPick;
@@ -77,12 +62,12 @@ public class AttachReceipt extends AppCompatActivity{
         //Set storage reference
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        //Set the type of report
+        //Set the type of attach
         type = "receipt";
 
         //Instance
-        reportDAL = new ReportDAL(type);
-        report = new Report();
+        attachDAL = new AttachDAL(type);
+        attach = new Attach();
 
         //Find the controls of the layout
         FindControls();
@@ -100,10 +85,10 @@ public class AttachReceipt extends AppCompatActivity{
         super.onStart();
 
         //Instantiate properties
-        reportDAL = new ReportDAL(type,this, lvReceipt, listReport);
+        attachDAL = new AttachDAL(type,this, lvReceipt, listAttach);
 
         //Fill the listview
-        reportDAL.listReport(UserProfile.getPropertyId());
+        attachDAL.listReport(UserProfile.getPropertyId());
     }
 
     /**
@@ -137,10 +122,10 @@ public class AttachReceipt extends AppCompatActivity{
             //Set the file reference
             StorageReference riversRef = storageReference.child(UserProfile.getPropertyId().toString() + "-receipts/" + currentDateTimeString + ".jpg");
 
-            //Add report info to database
-            report.setName(currentDateTimeString);
-            report.setPropertyId(UserProfile.getPropertyId());
-            reportDAL.addReport(report);
+            //Add attach info to database
+            attach.setName(currentDateTimeString);
+            attach.setPropertyId(UserProfile.getPropertyId());
+            attachDAL.addReport(attach);
 
             //Upload file
             riversRef.putFile(filePath)
@@ -230,8 +215,8 @@ public class AttachReceipt extends AppCompatActivity{
         lvReceipt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Report report = listReport.get(position);
-                downloadFile(report.getName());
+                Attach attach = listAttach.get(position);
+                downloadFile(attach.getName());
             }
         });
     }
@@ -244,7 +229,7 @@ public class AttachReceipt extends AppCompatActivity{
         buttonPick = (Button)findViewById(R.id.buttonpick);
         mImageView = (ImageView)findViewById(R.id.image);
         lvReceipt = (ListView)findViewById(R.id.lvReceipt);
-        listReport = new ArrayList<>();
+        listAttach = new ArrayList<>();
     }
 }
 

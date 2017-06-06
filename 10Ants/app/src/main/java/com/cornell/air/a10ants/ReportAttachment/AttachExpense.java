@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.cornell.air.a10ants.DAL.ReportDAL;
-import com.cornell.air.a10ants.Model.Report;
+import com.cornell.air.a10ants.DAL.AttachDAL;
+import com.cornell.air.a10ants.Model.Attach;
 import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,10 +44,10 @@ public class AttachExpense extends AppCompatActivity{
     private static final int PICKFILE_RESULT_CODE = 1;
     private StorageReference storageReference;
     Uri filePath;
-    ReportDAL reportDAL;
-    Report report;
+    AttachDAL attachDAL;
+    Attach attach;
     ListView lvExpenses;
-    List<Report> listReport;
+    List<Attach> listAttach;
     ImageView mImageView;
     boolean isDisplaying;
     Button buttonPick;
@@ -62,12 +62,12 @@ public class AttachExpense extends AppCompatActivity{
         //Set storage reference
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        //Set the type of report
+        //Set the type of attach
         type = "expense";
 
         //Instance
-        reportDAL = new ReportDAL(type);
-        report = new Report();
+        attachDAL = new AttachDAL(type);
+        attach = new Attach();
 
         //Find the controls of the layout
         FindControls();
@@ -85,10 +85,10 @@ public class AttachExpense extends AppCompatActivity{
         super.onStart();
 
         //Instantiate properties
-        reportDAL = new ReportDAL(type, this, lvExpenses, listReport);
+        attachDAL = new AttachDAL(type, this, lvExpenses, listAttach);
 
         //Fill the listview
-        reportDAL.listReport(UserProfile.getPropertyId());
+        attachDAL.listReport(UserProfile.getPropertyId());
     }
 
     /**
@@ -122,10 +122,10 @@ public class AttachExpense extends AppCompatActivity{
             //Set the file reference
             StorageReference riversRef = storageReference.child(UserProfile.getPropertyId().toString() + "-expenses/" + currentDateTimeString + ".jpg");
 
-            //Add report info to database
-            report.setName(currentDateTimeString);
-            report.setPropertyId(UserProfile.getPropertyId());
-            reportDAL.addReport(report);
+            //Add attach info to database
+            attach.setName(currentDateTimeString);
+            attach.setPropertyId(UserProfile.getPropertyId());
+            attachDAL.addReport(attach);
 
             //Upload file
             riversRef.putFile(filePath)
@@ -215,8 +215,8 @@ public class AttachExpense extends AppCompatActivity{
         lvExpenses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Report report = listReport.get(position);
-                downloadFile(report.getName());
+                Attach attach = listAttach.get(position);
+                downloadFile(attach.getName());
             }
         });
     }
@@ -229,7 +229,7 @@ public class AttachExpense extends AppCompatActivity{
         buttonPick = (Button)findViewById(R.id.buttonpick);
         mImageView = (ImageView)findViewById(R.id.image);
         lvExpenses = (ListView)findViewById(R.id.lvExpenses);
-        listReport = new ArrayList<>();
+        listAttach = new ArrayList<>();
     }
 }
 
