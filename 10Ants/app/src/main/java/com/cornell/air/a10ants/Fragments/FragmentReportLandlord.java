@@ -1,21 +1,17 @@
 package com.cornell.air.a10ants.Fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
-import com.cornell.air.a10ants.ReportAttachment.AttachReceipt;
-import com.cornell.air.a10ants.ReportAttachment.AttachReport;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

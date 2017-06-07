@@ -154,13 +154,4 @@ public class ExpenseDAL {
             return false;
         }
     }
-
-    /**
-     *
-     * TODO: edit and delete
-     * Separate the expense VIEW and the expense class
-     * Check the validation
-     * add listing method based on property, tenant
-     * Javadocs
-     */
 }

@@ -21,7 +21,7 @@ public class ReportList extends ArrayAdapter<Report>{
     private List<Report> reportList;
 
     public ReportList(Activity context, List<Report> reportList){
-        super(context, R.layout.custom_list_expense, reportList);
+        super(context, R.layout.custom_list_report, reportList);
         this.context = context;
         this.reportList = reportList;
     }
@@ -31,14 +31,18 @@ public class ReportList extends ArrayAdapter<Report>{
     public View getView(int position, View convertView, ViewGroup parent)
     {
         LayoutInflater inflater = context.getLayoutInflater();
+        View ListViewItem = inflater.inflate(R.layout.custom_list_report, null, true);
 
-        View ListViewItem = inflater.inflate(R.layout.custom_list_tenant, null, true);
-
-        TextView tvName = (TextView) ListViewItem.findViewById(R.id.tvName);
+        //Find the controls in layout
+        TextView tvTitle = (TextView) ListViewItem.findViewById(R.id.tvTitle);
+        TextView tvDate = (TextView) ListViewItem.findViewById(R.id.tvDate);
+        TextView tvUserName = (TextView) ListViewItem.findViewById(R.id.tvUserName);
 
         Report report = reportList.get(position);
 
-        tvName.setText(report.getName());
+        tvTitle.setText(report.getTitle());
+        tvDate.setText(report.getDateSent());
+        tvUserName.setText(report.getUserName());
 
         return ListViewItem;
     }
