@@ -1,33 +1,32 @@
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/colorBlue"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-
-        />
+    android:layout_height="fill_parent">
     <Button
         android:id="@+id/buttonpick"
-        android:src="@drawable/addicon01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="- Add Files -"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@color/colororange"
-        android:drawableLeft="@drawable/addicon01"
+        android:textColor="@color/cardview_light_background"
+        android:background="@color/colorPrimaryDark"
         android:clickable="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />
-    <TextView
-        android:id="@+id/textfile"
-        android:layout_width="fill_parent"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-</LinearLayout>
+        android:layout_below="@+id/buttonpick"/>
+
+    <ListView
+    android:id="@+id/lvReceipt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:layout_below="@+id/image" />
+
+</RelativeLayout>

@@ -11,11 +11,12 @@ import android.widget.Toast;
 
 import com.cornell.air.a10ants.DAL.ChatMessageDAL;
 import com.cornell.air.a10ants.DAL.PropertyDAL;
+import com.cornell.air.a10ants.DAL.ReportDAL;
 import com.cornell.air.a10ants.Fragments.FragmentAbout;
 import com.cornell.air.a10ants.Fragments.FragmentChatLandlord;
-import com.cornell.air.a10ants.Fragments.FragmentChatTenant;
 import com.cornell.air.a10ants.Fragments.FragmentOverviewLandlord;
-import com.cornell.air.a10ants.Fragments.FragmentReport;
+import com.cornell.air.a10ants.Fragments.FragmentReportLandlord;
+import com.cornell.air.a10ants.Fragments.FragmentReportTenant;
 import com.cornell.air.a10ants.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -105,8 +106,11 @@ public class MenuFrame extends AppCompatActivity {
                 }
                 //Redirects to Report menu
                 else if (menuItemId == R.id.menuReport) {
-                    FragmentReport rep = new FragmentReport();
+                    FragmentReportLandlord rep = new FragmentReportLandlord();
                     getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
+
+                    ReportDAL reportDAL = new ReportDAL();
+                    reportDAL.createReportTenantLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
                 }
                 //Redirects to Chat menu
                 else if (menuItemId == R.id.menuChat) {
@@ -134,6 +138,13 @@ public class MenuFrame extends AppCompatActivity {
 
                     ChatMessageDAL chatMessageDAL = new ChatMessageDAL();
                     chatMessageDAL.createChatLandlordLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
+                }
+                else if (menuItemId == R.id.menuReport){
+                    FragmentReportLandlord rep = new FragmentReportLandlord();
+                    getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
+
+                    ReportDAL reportDAL = new ReportDAL();
+                    reportDAL.createReportTenantLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
                 }
             }
         });

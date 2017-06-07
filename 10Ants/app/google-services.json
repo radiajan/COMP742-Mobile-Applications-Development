@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "104100809985-srv396f0rd9s333nbfgje1943qappdig.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cornell.air.a10ants",
+            "certificate_hash": "8989b5aeefad08c0c4d2bce99a2bd9247b13ce4b"
+          }
+        },
+        {
           "client_id": "104100809985-abdjr67l7qvbamlqtgu03ta1vsvlne4i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
