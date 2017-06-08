@@ -24,9 +24,12 @@
     <string name="information_property">Property Information</string>
     <string name="information_tenant">Tenant Information</string>
     <string name="information_expense">Expense Information</string>
-    <string name="add_property">Save Property</string>
-    <string name="add_expense">Save Expense</string>
-    <string name="add_tenant">Save Tenant</string>
+    <string name="add_property">Add Property</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="add_tenant">Add Tenant</string>
+    <string name="save_property">Save Property</string>
+    <string name="save_expense">Save Expense</string>
+    <string name="save_tenant">Save Tenant</string>
     <string name="select_property">Select Property</string>
     <string name = "select_expense">Select Expense</string>
     <string name="property_type">Property Type</string>
