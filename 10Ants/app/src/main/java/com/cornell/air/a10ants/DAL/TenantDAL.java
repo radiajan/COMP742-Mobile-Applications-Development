@@ -28,14 +28,11 @@ import java.util.List;
  */
 
 public class TenantDAL {
-    //Reference to the expense database
+    //Variable instance
     DatabaseReference database;
     Activity activity;
     ListView list;
     List<Tenant> listTenant;
-    List<Property> listProperty;
-    Activity activityProperty;
-    ListView listPropertyDisplay;
     String propertyId;
     View viewTenant;
 
@@ -53,16 +50,9 @@ public class TenantDAL {
         this.propertyId = propertyId;
     }
 
-    public TenantDAL(Activity activity, ListView listPropertyDisplay, List<Property> listProperty){
-        database = FirebaseDatabase.getInstance().getReference("properties");
-        this.activityProperty = activity;
-        this.listPropertyDisplay = listPropertyDisplay;
-        this.listProperty = listProperty;
-    }
-
     /**
-     * Add the validations of the controls
-     * @param tenant
+     * Save tenant information
+     * @param tenant object containing the tenant information
      */
     public boolean addTenant(Tenant tenant)
     {
@@ -91,8 +81,8 @@ public class TenantDAL {
     }
 
     /**
-     * Add the validations of the controls
-     * @param tenant
+     * Edit the information of the tenant
+     * @param tenant object to be changed
      */
     public boolean editTenant(Tenant tenant)
     {
@@ -118,15 +108,15 @@ public class TenantDAL {
     }
 
     /**
-     * Delete tenant
-     * @param id
+     * Delete tenant information
+     * @param id tenant to be deleted
      */
     public void deleteTenant(String id){
         database.child(id).removeValue();
     }
 
     /**
-     * list the expenses
+     * list the tenants
      */
     public void listTenant(){
         //Fetch data for the expenses
@@ -153,6 +143,11 @@ public class TenantDAL {
         });
     }
 
+    /**
+     * Get the specific property
+     * @param email email of the user
+     * @param view contains the controls
+     */
     public void getProperty(String email,View view){
         //Set the view content
         viewTenant = view;

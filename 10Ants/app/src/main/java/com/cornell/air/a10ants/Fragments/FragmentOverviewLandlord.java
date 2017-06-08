@@ -11,19 +11,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.TabHost;
-
 import com.cornell.air.a10ants.DAL.PropertyDAL;
-import com.cornell.air.a10ants.DAL.TenantDAL;
 import com.cornell.air.a10ants.Model.Property;
-import com.cornell.air.a10ants.Model.Tenant;
 import com.cornell.air.a10ants.R;
 import com.cornell.air.a10ants.View.PropertyDetails;
 import com.cornell.air.a10ants.View.addProperty;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
 

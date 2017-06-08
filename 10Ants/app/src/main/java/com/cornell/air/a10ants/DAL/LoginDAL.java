@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class LoginDAL {
-    //Instance of objects
+    //Variable initialization
     DatabaseReference databaseTenant;
     DatabaseReference databaseProperty;
 
@@ -29,9 +29,8 @@ public class LoginDAL {
         databaseProperty = FirebaseDatabase.getInstance().getReference("properties");
     }
 
-
     /**
-     * Loads user profile
+     * Loads the information of the user
      */
     public void setUserProfile() {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {

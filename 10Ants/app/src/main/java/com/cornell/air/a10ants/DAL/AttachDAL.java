@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 public class AttachDAL {
-    //Reference to the expense database
+    //Variables initialization
     DatabaseReference database;
     private FirebaseListAdapter<ChatMessage> adapter;
     String emailDAL;
@@ -60,8 +60,8 @@ public class AttachDAL {
 
     /**
      * Creates the layout of the chat for the landlord
-     * @param email
-     * @param fmr
+     * @param email email of the landlord
+     * @param fmr Fragment Manager object
      */
     public void createReportTenantLayout(String email, FragmentManager fmr)
     {
@@ -93,8 +93,8 @@ public class AttachDAL {
     }
 
     /**
-     * Add the validations of the controls
-     * @param tenant
+     * Save the report information in the database
+     * @param attach object with the information of the attached file
      */
     public void addReport(Attach attach)
     {
@@ -110,7 +110,8 @@ public class AttachDAL {
     }
 
     /**
-     * List the properties
+     * Return the list of properties
+     * @param propertyId filter variable
      */
     public void listReport(String propertyId) {
         database.orderByChild("propertyId").equalTo(propertyId).addValueEventListener(new ValueEventListener() {

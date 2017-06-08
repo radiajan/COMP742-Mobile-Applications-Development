@@ -6,17 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.DAL.TenantDAL;
-import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.Tenant;
 import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
-import com.cornell.air.a10ants.View.PropertyDetails;
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -53,9 +53,10 @@
         android:layout_height="67dp"
         android:layout_below="@id/trFeedback">
         <TextView
+            android:id="@+id/tvEmail"
             android:text="@string/email"
             android:layout_gravity="center_vertical"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
     </TableRow>
 
     <TableRow

@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 public class PropertyDAL {
-    //Instance
+    //Variable initialization
     DatabaseReference database;
     List<Property> listProperty;
     Activity activityProperty;
@@ -46,8 +46,8 @@ public class PropertyDAL {
     }
 
     /**
-     * Add property data
-     * @param property
+     * Add property information
+     * @param property object to be included
      * @return condition
      */
     public boolean addProperty(Property property){
@@ -73,8 +73,8 @@ public class PropertyDAL {
     }
 
     /**
-     * Edit property data
-     * @param property
+     * Edit property information
+     * @param property object to be changed
      * @return condition
      */
     public boolean editProperty(Property property){
@@ -97,7 +97,8 @@ public class PropertyDAL {
     }
 
     /**
-     * List the properties
+     * List of available properties
+     * @param email filter variable
      */
     public void listProperty(String email) {
         database.orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
@@ -123,7 +124,6 @@ public class PropertyDAL {
         });
     }
 
-
     /**
      * Delete property
      * @param id to be deleted
@@ -134,7 +134,7 @@ public class PropertyDAL {
 
     /**
      * Chek if the fields are empty
-     * @param property
+     * @param property object to be validated
      * @return condition
      */
     private boolean isFieldEmpty(Property property){
@@ -150,6 +150,11 @@ public class PropertyDAL {
         }
     }
 
+    /**
+     * Create the layout of the tenant
+     * @param email email of the tenant
+     * @param fmr Fragment Manager object
+     */
     public void createTenantLayout(String email, FragmentManager fmr)
     {
         //Set value to variables

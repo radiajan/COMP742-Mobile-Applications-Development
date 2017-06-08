@@ -18,12 +18,36 @@ public class Attach {
         this.name = name;
     }
 
+    /**
+     * Return the value of the id
+     * @return return value
+     */
     public String getId() {return id;}
+    /**
+     * Set the value of the id
+     * @param id variable to be loaded
+     */
     public void setId(String id) {this.id = id;}
 
+    /**
+     * Return the value of the propertyId
+     * @return return value
+     */
     public String getPropertyId() {return propertyId;}
+    /**
+     * Set the value of the propertyId
+     * @param propertyId variable to be loaded
+     */
     public void setPropertyId(String propertyId) {this.propertyId = propertyId;}
 
+    /**
+     * Return the value of the name
+     * @return return value
+     */
     public String getName() {return name;}
+    /**
+     * Set the value of the name
+     * @param name variable to be loaded
+     */
     public void setName(String name) {this.name = name;}
 }

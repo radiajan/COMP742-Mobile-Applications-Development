@@ -27,7 +27,7 @@ import java.util.List;
  */
 
 public class ReportDAL {
-    //Reference to the expense database
+    //Variable initialization
     DatabaseReference database;
     Activity activity;
     ListView list;
@@ -76,15 +76,8 @@ public class ReportDAL {
     }
 
     /**
-     * Confirm the report
-     * @param id
-     */
-    public void confirmReport(String id){
-        database.child(id).removeValue();
-    }
-
-    /**
-     * list the expenses
+     * List of the availables reports
+     * @param propertyId filter variable
      */
     public void listReport(String propertyId){
         //Fetch data for the expenses
@@ -113,7 +106,7 @@ public class ReportDAL {
 
     /**
      * Check if the field if empty
-     * @param report
+     * @param report object to be validated
      * @return validation
      */
     private boolean isFieldEmpty(Report report){

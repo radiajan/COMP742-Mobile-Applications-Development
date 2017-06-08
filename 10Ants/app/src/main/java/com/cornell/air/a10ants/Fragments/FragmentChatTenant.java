@@ -10,15 +10,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.cornell.air.a10ants.DAL.ChatMessageDAL;
 import com.cornell.air.a10ants.Model.ChatMessage;
 import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
-
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
 
@@ -32,7 +29,7 @@ public class FragmentChatTenant extends Fragment{
 
     //Add Emojicon
     EmojiconEditText emojiconEditText;
-    ImageView emojiButton,submitButton;
+    ImageView submitButton;
 
     //Class reference
     ChatMessageDAL chatMessageDAL;
@@ -63,6 +60,10 @@ public class FragmentChatTenant extends Fragment{
         return view;
     }
 
+    /**
+     * Load the list of messages in the layout
+     * @param view contains the controls to be loaded
+     */
     private void displayChatMessage(View view) {
 
         ListView listOfMessage = (ListView)view.findViewById(R.id.list_of_message);
