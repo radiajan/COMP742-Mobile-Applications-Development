@@ -31,7 +31,7 @@ import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
  */
 
 public class ChatMessageDAL {
-    //Reference to the expense database
+    //Variables initialization
     DatabaseReference database;
     private FirebaseListAdapter<ChatMessage> adapter;
     String emailDAL;
@@ -42,19 +42,18 @@ public class ChatMessageDAL {
         database = FirebaseDatabase.getInstance().getReference("messages").child(UserProfile.getPropertyId().toString()+"-messages");
     }
 
-    public ChatMessageDAL(String propertyId){
-        //Load the data base
-        database = FirebaseDatabase.getInstance().getReference("messages");
-    }
-
+    /**
+     * Save message in database
+     * @param text text to be saved
+     */
     public void addMessage(String text){
         database.push().setValue(new ChatMessage(text, FirebaseAuth.getInstance().getCurrentUser().getDisplayName()));
     }
 
     /**
      * Creates the layout of the chat for the landlord
-     * @param email
-     * @param fmr
+     * @param email email of the landlord
+     * @param fmr Fragment Manager object
      */
     public void createChatLandlordLayout(String email, FragmentManager fmr)
     {

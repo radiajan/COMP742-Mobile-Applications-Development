@@ -18,27 +18,27 @@ public class ChatMessage {
         messageTime = new Date().getTime();
     }
 
-    public ChatMessage() {
-    }
-
+    /**
+     * Return the value of the message text
+     * @return return value
+     */
     public String getMessageText() {
         return messageText;
     }
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
-    }
 
+    /**
+     * Return the value of the message user
+     * @return return value
+     */
     public String getMessageUser() {
         return messageUser;
     }
-    public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
-    }
 
+    /**
+     * Return the value of the message time
+     * @return return value
+     */
     public long getMessageTime() {
         return messageTime;
-    }
-    public void setMessageTime(long messageTime) {
-        this.messageTime = messageTime;
     }
 }

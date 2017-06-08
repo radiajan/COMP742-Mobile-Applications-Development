@@ -102,7 +102,7 @@ public class addExpense extends AppCompatActivity {
         expense.setPropertyId(propertyId);
 
         //Create the instance of the DAO object
-        expenseDAL = new ExpenseDAL(propertyId);
+        expenseDAL = new ExpenseDAL();
 
         //Add the expense values
         boolean isSaved;

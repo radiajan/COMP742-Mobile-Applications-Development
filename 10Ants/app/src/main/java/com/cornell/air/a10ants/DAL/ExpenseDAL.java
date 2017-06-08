@@ -24,18 +24,18 @@ import java.util.List;
  */
 
 public class ExpenseDAL {
-    //Reference to the expense database
+    //Variables initialization
     DatabaseReference database;
     Activity activity;
     ListView list;
     List<Expense> listExpense;
 
-    public ExpenseDAL(String propertyId){
+    public ExpenseDAL(){
         //Load the data base
         database = FirebaseDatabase.getInstance().getReference("expenses");
     }
 
-    public ExpenseDAL(String propertyId, Activity activity, ListView list, List<Expense> listExpense){
+    public ExpenseDAL(Activity activity, ListView list, List<Expense> listExpense){
         //Load the data base
         database = FirebaseDatabase.getInstance().getReference("expenses");
         this.activity = activity;
@@ -45,7 +45,7 @@ public class ExpenseDAL {
 
     /**
      * Edit the validations of the controls
-     * @param expense
+     * @param expense object with the changes
      */
     public boolean editExpense(Expense expense)
     {
@@ -71,8 +71,8 @@ public class ExpenseDAL {
     }
 
     /**
-     * Add the validations of the controls
-     * @param expense
+     * Save the data of the expense
+     * @param expense object to be included
      */
     public boolean addExpense(Expense expense)
     {
@@ -102,14 +102,14 @@ public class ExpenseDAL {
 
     /**
      * delete the expense
-     * @param id
+     * @param id item to be deleted
      */
     public void deleteExpense(String id){
         database.child(id).removeValue();
     }
 
     /**
-     * list the expenses
+     * Return the list of expenses
      */
     public void listExpense(){
         //Fetch data for the expenses
@@ -138,7 +138,7 @@ public class ExpenseDAL {
 
     /**
      * Check if the field if empty
-     * @param expense
+     * @param expense object to be validated
      * @return validation
      */
     private boolean isFieldEmpty(Expense expense){

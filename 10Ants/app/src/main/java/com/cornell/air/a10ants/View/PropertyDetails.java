@@ -163,7 +163,7 @@ public class PropertyDetails extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         //Delete selected item
                         if(item.getTitle().equals("Delete")) {
-                            expenseDAL = new ExpenseDAL(propertyId);
+                            expenseDAL = new ExpenseDAL();
                             expenseDAL.deleteExpense(expense.getId());
                         }
                         else if (item.getTitle().equals("Edit")) {
@@ -195,7 +195,7 @@ public class PropertyDetails extends AppCompatActivity {
         super.onStart();
 
         //Instantiate properties
-        expenseDAL = new ExpenseDAL(propertyId,PropertyDetails.this, lvExpense, listExpense);
+        expenseDAL = new ExpenseDAL(PropertyDetails.this, lvExpense, listExpense);
         //Fill the listview
         expenseDAL.listExpense();
 
