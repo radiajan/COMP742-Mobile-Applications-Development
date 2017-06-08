@@ -1,7 +1,6 @@
 package com.cornell.air.a10ants.View;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,14 +14,13 @@ import android.widget.Toast;
 import com.cornell.air.a10ants.DAL.ExpenseDAL;
 import com.cornell.air.a10ants.Model.Expense;
 import com.cornell.air.a10ants.R;
-import com.google.firebase.database.DatabaseReference;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by root on 8/05/17.
+ * Created by adrian on 06/06/17.
  */
 
 public class addExpense extends AppCompatActivity {
@@ -65,6 +63,9 @@ public class addExpense extends AppCompatActivity {
         setControlData();
     }
 
+    /**
+     * Shows the calendar android widget
+     */
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -77,7 +78,7 @@ public class addExpense extends AppCompatActivity {
     };
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy"; //In which you need put to here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         etPaidOn.setText(sdf.format(myCalendar.getTime()));

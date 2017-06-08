@@ -6,7 +6,6 @@ import android.widget.EditText;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.cornell.air.a10ants.DAL.AttachDAL;
 import com.cornell.air.a10ants.DAL.ReportDAL;
 import com.cornell.air.a10ants.Model.Report;
 import com.cornell.air.a10ants.Model.UserProfile;
