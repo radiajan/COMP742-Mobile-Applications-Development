@@ -4,28 +4,22 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cornell.air.a10ants.DAL.TenantDAL;
-import com.cornell.air.a10ants.Model.Property;
 import com.cornell.air.a10ants.Model.Tenant;
 import com.cornell.air.a10ants.R;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by root on 8/05/17.
+ * Created by adrian on 06/06/17.
  */
 
 public class addTenant extends AppCompatActivity {

@@ -40,16 +40,16 @@ import java.util.List;
  */
 
 public class AttachExpense extends AppCompatActivity{
-    //Instance
-    private static final int PICKFILE_RESULT_CODE = 1;
-    private StorageReference storageReference;
-    Uri filePath;
-    AttachDAL attachDAL;
-    Attach attach;
-    ListView lvExpenses;
-    List<Attach> listAttach;
-    ImageView mImageView;
-    boolean isDisplaying;
+        //Instance
+        private static final int PICKFILE_RESULT_CODE = 1;
+        private StorageReference storageReference;
+        Uri filePath;
+        AttachDAL attachDAL;
+        Attach attach;
+        ListView lvExpenses;
+        List<Attach> listAttach;
+        ImageView mImageView;
+        boolean isDisplaying;
     Button buttonPick;
     String type;
 

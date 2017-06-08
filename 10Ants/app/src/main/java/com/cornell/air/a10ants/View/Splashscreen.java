@@ -22,7 +22,6 @@ public class Splashscreen extends AppCompatActivity {
 
     ProgressBar mprogressbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +49,4 @@ public class Splashscreen extends AppCompatActivity {
             }
         }, 5000);
     }
-
-
 }

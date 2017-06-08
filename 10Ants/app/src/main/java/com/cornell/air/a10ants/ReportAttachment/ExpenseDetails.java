@@ -7,10 +7,11 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.cornell.air.a10ants.R;
+
 import java.text.SimpleDateFormat;
 
 /**
@@ -56,7 +57,10 @@ public class ExpenseDetails extends AppCompatActivity {
     class btnTakePhotoClicker implements Button.OnClickListener
 
     {
-
+        /**
+         * Starts the camera intent to capture and store expense image
+         * @param v
+         */
         @Override
         public void onClick(View v) {
             //TODO Auto-generated method stub

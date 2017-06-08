@@ -1,44 +1,28 @@
 package com.cornell.air.a10ants.View;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
 import com.cornell.air.a10ants.DAL.ExpenseDAL;
-import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.DAL.TenantDAL;
 import com.cornell.air.a10ants.Model.Expense;
-import com.cornell.air.a10ants.Model.ExpenseList;
-import com.cornell.air.a10ants.Model.Property;
-import com.cornell.air.a10ants.Model.PropertyList;
 import com.cornell.air.a10ants.Model.Tenant;
-import com.cornell.air.a10ants.Model.TenantList;
 import com.cornell.air.a10ants.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by root on 8/05/17.
+ * Created by adrian on 06/06/17.
  */
 
 public class PropertyDetails extends AppCompatActivity {

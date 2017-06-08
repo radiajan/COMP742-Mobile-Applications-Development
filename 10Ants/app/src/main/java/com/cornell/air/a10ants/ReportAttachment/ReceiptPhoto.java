@@ -9,17 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.cornell.air.a10ants.R;
+
 import java.text.SimpleDateFormat;
 
 /**
  * Created by ivy on 6/6/2017.
  */
-
-
-
-import com.cornell.air.a10ants.R;
-
-import java.text.SimpleDateFormat;
 
 public class ReceiptPhoto extends AppCompatActivity {
 
@@ -58,7 +55,10 @@ public class ReceiptPhoto extends AppCompatActivity {
     class btnTakePhotoClicker implements Button.OnClickListener
 
     {
-
+        /**
+         * Starts the camera intent to capture and store receipt image
+         * @param v
+         */
         @Override
         public void onClick(View v) {
             //TODO Auto-generated method stub
