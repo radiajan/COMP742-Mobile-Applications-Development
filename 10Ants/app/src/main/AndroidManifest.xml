@@ -13,14 +13,14 @@
         android:roundIcon="@mipmap/icon1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Login">
+        <activity android:name=".View.Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".View.Login"></activity>-->
+        <activity android:name=".View.Login"></activity>
         <activity android:name=".View.PropertyDetails"></activity>
         <activity android:name=".Menu.MenuFrame"></activity>
         <activity android:name=".View.addProperty"></activity>

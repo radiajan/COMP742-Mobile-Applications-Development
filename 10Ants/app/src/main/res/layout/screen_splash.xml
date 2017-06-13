@@ -8,7 +8,6 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:background="@color/colorBlue"
     tools:context="com.cornell.air.a10ants.View.Login">
 
 
@@ -28,7 +27,7 @@
         android:id="@+id/imageView"
         android:layout_width="280dp"
         android:layout_height="280dp"
-        android:src="@drawable/welcome"
+        android:src="@drawable/slogo01"
         android:layout_above="@+id/progressBar"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
