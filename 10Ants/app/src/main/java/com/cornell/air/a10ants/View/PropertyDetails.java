@@ -179,7 +179,8 @@ public class PropertyDetails extends AppCompatActivity {
         super.onStart();
 
         //Instantiate properties
-        expenseDAL = new ExpenseDAL(PropertyDetails.this, lvExpense, listExpense);
+        expenseDAL = new ExpenseDAL(propertyId,PropertyDetails.this, lvExpense, listExpense);
+
         //Fill the listview
         expenseDAL.listExpense();
 

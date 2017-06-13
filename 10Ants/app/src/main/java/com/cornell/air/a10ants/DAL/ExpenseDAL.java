@@ -28,6 +28,7 @@ public class ExpenseDAL {
     DatabaseReference database;
     Activity activity;
     ListView list;
+    String propertyId;
     List<Expense> listExpense;
 
     public ExpenseDAL(){
@@ -35,12 +36,13 @@ public class ExpenseDAL {
         database = FirebaseDatabase.getInstance().getReference("expenses");
     }
 
-    public ExpenseDAL(Activity activity, ListView list, List<Expense> listExpense){
+    public ExpenseDAL(String propertyId, Activity activity, ListView list, List<Expense> listExpense){
         //Load the data base
         database = FirebaseDatabase.getInstance().getReference("expenses");
         this.activity = activity;
         this.list = list;
         this.listExpense = listExpense;
+        this.propertyId = propertyId;
     }
 
     /**
@@ -113,7 +115,7 @@ public class ExpenseDAL {
      */
     public void listExpense(){
         //Fetch data for the expenses
-        database.addValueEventListener(new ValueEventListener() {
+        database.orderByChild("propertyId").equalTo(propertyId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Clears previous data
