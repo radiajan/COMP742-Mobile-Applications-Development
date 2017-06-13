@@ -10,6 +10,8 @@
         <TextView
             android:text="@string/information_expense"
             android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
             android:textSize="15sp"/>
     </TableRow>
 

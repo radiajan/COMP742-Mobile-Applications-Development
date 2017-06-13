@@ -11,6 +11,8 @@
         <TextView
             android:text="@string/information_tenant"
             android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
             android:textSize="15sp"/>
     </TableRow>
 
