@@ -3,11 +3,11 @@
     <string name="tenants">Tenants</string>
     <string name="expenses">Expenses</string>
     <string name="about_app">About App</string>>
-    <string name="help">Help and FAQ</string>
-    <string name="terms_conditions">Terms and Conditions</string>
+    <string name="developed_by">Developed By Team AIR</string>
+    <string name="team_members">Adrian Del Rosario | Ivy Rose Valdez | Rodrigo Adati</string>
     <string name="feedback">Feedback</string>
     <string name="email">Email</string>
-    <string name="recommend_friends">Recommend to Friends</string>
+    <string name="recommend_friends">Recommend to Friends via email</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
     <string name="description">Description</string>
@@ -31,7 +31,7 @@
     <string name="save_expense">Save Expense</string>
     <string name="save_tenant">Save Tenant</string>
     <string name="select_property">Select Property</string>
-    <string name = "select_expense">Select Expense</string>
+    <string name="select_expense">Select Expense</string>
     <string name="property_type">Property Type</string>
     <string name="property_name">Name:</string>
     <string name="property_address">Address:</string>
@@ -50,6 +50,7 @@
     </array>
 
     <array name="expense_type">
+        <item>Rent</item>
         <item>Water</item>
         <item>Power</item>
         <item>Internet</item>

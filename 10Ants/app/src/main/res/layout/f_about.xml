@@ -10,6 +10,8 @@
         <TextView
             android:text="@string/about_app"
             android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
             android:textSize="15sp"/>
     </TableRow>
 
@@ -19,7 +21,7 @@
         android:layout_height="67dp"
         android:layout_below="@id/trAbout">
         <TextView
-            android:text="@string/help"
+            android:text="@string/developed_by"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>
@@ -30,7 +32,7 @@
         android:layout_height="67dp"
         android:layout_below="@id/trHelpFAQ">
         <TextView
-            android:text="@string/terms_conditions"
+            android:text="@string/team_members"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"/>
     </TableRow>
@@ -44,6 +46,8 @@
         <TextView
             android:text="@string/feedback"
             android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
             android:textSize="15sp"/>
     </TableRow>
 
@@ -54,19 +58,8 @@
         android:layout_below="@id/trFeedback">
         <TextView
             android:id="@+id/tvEmail"
-            android:text="@string/email"
-            android:layout_gravity="center_vertical"
-            android:textSize="15sp" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/trRecommend"
-        android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:layout_below="@id/trEmail">
-        <TextView
             android:text="@string/recommend_friends"
             android:layout_gravity="center_vertical"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
     </TableRow>
 </RelativeLayout>

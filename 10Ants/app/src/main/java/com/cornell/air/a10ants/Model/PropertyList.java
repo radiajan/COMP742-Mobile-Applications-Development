@@ -36,7 +36,6 @@ public class PropertyList extends ArrayAdapter<Property> {
 
         View ListViewItem = inflater.inflate(R.layout.custom_list_property, null, true);
 
-        ImageView propImage = (ImageView) ListViewItem.findViewById(R.id.propImage);
         TextView tvName = (TextView) ListViewItem.findViewById(R.id.tvName);
         TextView tvDescription = (TextView) ListViewItem.findViewById(R.id.tvDescription);
 

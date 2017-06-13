@@ -10,6 +10,7 @@
             android:id="@+id/btnAddPropertyLandlord"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:background="@color/tenantsGreen"
             android:text="@string/add_property" />
 
         <ListView

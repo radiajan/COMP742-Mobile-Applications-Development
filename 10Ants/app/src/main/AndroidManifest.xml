@@ -13,8 +13,7 @@
         android:roundIcon="@mipmap/icon1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Login"
-            android:screenOrientation="portrait">
+        <activity android:name=".View.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

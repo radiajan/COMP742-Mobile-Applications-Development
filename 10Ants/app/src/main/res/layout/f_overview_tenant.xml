@@ -13,6 +13,8 @@
                 <TextView
                     android:text="@string/information_property"
                     android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="15sp"/>
         </TableRow>
 
@@ -57,6 +59,8 @@
                 <TextView
                     android:text="@string/tenants"
                     android:layout_gravity="center_vertical"
+                    android:textColor="@color/cardview_light_background"
+                    android:textAlignment="center"
                     android:textSize="15sp"/>
         </TableRow>
         <ListView

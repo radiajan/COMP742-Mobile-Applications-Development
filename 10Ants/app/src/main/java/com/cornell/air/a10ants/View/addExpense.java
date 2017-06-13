@@ -169,7 +169,7 @@ public class addExpense extends AppCompatActivity {
      * Set the data to the controls
      */
     private void setControlData(){
-        etAmount.setText(""+expenseAmount);
+        etAmount.setText(expenseAmount != null ? ""+expenseAmount : "");
         etPaidTo.setText(expensePaidTo);
         etPaidOn.setText(expensePaidOn);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.expense_type, android.R.layout.simple_spinner_item);
