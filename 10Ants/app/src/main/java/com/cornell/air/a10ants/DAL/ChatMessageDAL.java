@@ -47,7 +47,7 @@ public class ChatMessageDAL {
      * @param text text to be saved
      */
     public void addMessage(String text){
-        database.push().setValue(new ChatMessage(text, FirebaseAuth.getInstance().getCurrentUser().getDisplayName()));
+        database.push().setValue(new ChatMessage(text, UserProfile.getUserName()));
     }
 
     /**

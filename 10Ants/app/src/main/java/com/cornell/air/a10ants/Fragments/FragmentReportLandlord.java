@@ -36,8 +36,7 @@ public class FragmentReportLandlord extends Fragment {
         View view = inflater.inflate(R.layout.f_report_landlord, container, false);
 
         //Get user email data
-        if(FirebaseAuth.getInstance().getCurrentUser() != null)
-            email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        email = UserProfile.getUserEmail();
 
         //Find control
         databaseProperty = FirebaseDatabase.getInstance().getReference("properties");
@@ -74,6 +73,6 @@ public class FragmentReportLandlord extends Fragment {
         propertyDAL = new PropertyDAL(getActivity(), lvReport, listProperty);
 
         //Fill the listview
-        propertyDAL.listProperty(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        propertyDAL.listProperty(UserProfile.getUserEmail());
     }
 }

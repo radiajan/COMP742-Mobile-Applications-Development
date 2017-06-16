@@ -23,6 +23,8 @@ public class LoginDAL {
     //Variable initialization
     DatabaseReference databaseTenant;
     DatabaseReference databaseProperty;
+    String name;
+    String email;
 
     public LoginDAL(){
         databaseTenant = FirebaseDatabase.getInstance().getReference("tenants");
@@ -32,51 +34,52 @@ public class LoginDAL {
     /**
      * Loads the information of the user
      */
-    public void setUserProfile() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            databaseTenant.orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+    public void setUserProfile(String emailParam, String nameParam) {
+        email = emailParam;
+        name  = nameParam;
 
-                    //Set User profile for landlord
-                    UserProfile.setUserEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                    UserProfile.setUserName(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-                    UserProfile.setUserProfile("landlord");
-                    UserProfile.setPropertyId("");
-                    UserProfile.setPropertyName("");
+        databaseTenant.orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    //Join json property table
-                    for (DataSnapshot tenantSnap : dataSnapshot.getChildren()) {
-                        Tenant tenant = tenantSnap.getValue(Tenant.class);
+                //Set User profile for landlord
+                UserProfile.setUserEmail(email);
+                UserProfile.setUserName(name);
+                UserProfile.setUserProfile("landlord");
+                UserProfile.setPropertyId("");
+                UserProfile.setPropertyName("");
 
-                        //Set User profile for tenants
-                        UserProfile.setUserEmail(tenant.getEmail());
-                        UserProfile.setUserName(tenant.getName());
-                        UserProfile.setPropertyId(tenant.getPropertyId());
-                        UserProfile.setUserProfile("tenant");
+                //Join json property table
+                for (DataSnapshot tenantSnap : dataSnapshot.getChildren()) {
+                    Tenant tenant = tenantSnap.getValue(Tenant.class);
 
-                        databaseTenant.orderByChild("id").equalTo(UserProfile.getPropertyId()).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot propertySnap : dataSnapshot.getChildren()) {
-                                    Property property = propertySnap.getValue(Property.class);
-                                    UserProfile.setPropertyName(property.getName());
-                                }
+                    //Set User profile for tenants
+                    UserProfile.setUserEmail(tenant.getEmail());
+                    UserProfile.setUserName(tenant.getName());
+                    UserProfile.setPropertyId(tenant.getPropertyId());
+                    UserProfile.setUserProfile("tenant");
+
+                    databaseTenant.orderByChild("id").equalTo(UserProfile.getPropertyId()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot propertySnap : dataSnapshot.getChildren()) {
+                                Property property = propertySnap.getValue(Property.class);
+                                UserProfile.setPropertyName(property.getName());
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                            }
-                        });
-                    }
+                        }
+                    });
                 }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
-        }
+            }
+        });
     }
 }

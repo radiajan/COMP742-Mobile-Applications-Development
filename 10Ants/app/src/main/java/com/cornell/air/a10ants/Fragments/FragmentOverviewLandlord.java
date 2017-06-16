@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.cornell.air.a10ants.View.PropertyDetails;
 import com.cornell.air.a10ants.View.addProperty;
@@ -59,8 +60,7 @@ public class FragmentOverviewLandlord extends Fragment {
         View view = inflater.inflate(R.layout.f_overview_landlord, container, false);
 
         //Get user email data
-        if(FirebaseAuth.getInstance().getCurrentUser() != null)
-            email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        email = UserProfile.getUserEmail();
 
         //Find control
         databaseProperty = FirebaseDatabase.getInstance().getReference("properties");
@@ -137,6 +137,6 @@ public class FragmentOverviewLandlord extends Fragment {
         propertyDAL = new PropertyDAL(getActivity(), listViewPropertyLandlord, listProperty);
 
         //Fill the listview
-        propertyDAL.listProperty(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        propertyDAL.listProperty(UserProfile.getUserEmail());
     }
 }

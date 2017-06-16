@@ -16,6 +16,7 @@ import com.cornell.air.a10ants.Fragments.FragmentAbout;
 import com.cornell.air.a10ants.Fragments.FragmentChatLandlord;
 import com.cornell.air.a10ants.Fragments.FragmentOverviewLandlord;
 import com.cornell.air.a10ants.Fragments.FragmentReportLandlord;
+import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -101,7 +102,7 @@ public class MenuFrame extends AppCompatActivity {
                     getFragmentManager().beginTransaction().replace(R.id.frame, o).commit();
 
                     PropertyDAL propertyDAL = new PropertyDAL();
-                    propertyDAL.createTenantLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
+                    propertyDAL.createTenantLayout(UserProfile.getUserEmail(), getFragmentManager());
                 }
                 //Redirects to Attach menu
                 else if (menuItemId == R.id.menuReport) {
@@ -109,7 +110,7 @@ public class MenuFrame extends AppCompatActivity {
                     getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
 
                     AttachDAL attachDAL = new AttachDAL();
-                    attachDAL.createReportTenantLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
+                    attachDAL.createReportTenantLayout(UserProfile.getUserEmail(), getFragmentManager());
                 }
                 //Redirects to Chat menu
                 else if (menuItemId == R.id.menuChat) {
@@ -117,7 +118,7 @@ public class MenuFrame extends AppCompatActivity {
                     getFragmentManager().beginTransaction().replace(R.id.frame, c).commit();
 
                     ChatMessageDAL chatMessageDAL = new ChatMessageDAL();
-                    chatMessageDAL.createChatLandlordLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
+                    chatMessageDAL.createChatLandlordLayout(UserProfile.getUserEmail(), getFragmentManager());
                 }
                 //Redirects to About menu
                 else if (menuItemId == R.id.menuAbout) {
@@ -136,14 +137,14 @@ public class MenuFrame extends AppCompatActivity {
                     getFragmentManager().beginTransaction().addToBackStack("landlordChat").replace(R.id.frame, c).commit();
 
                     ChatMessageDAL chatMessageDAL = new ChatMessageDAL();
-                    chatMessageDAL.createChatLandlordLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
+                    chatMessageDAL.createChatLandlordLayout(UserProfile.getUserEmail(), getFragmentManager());
                 }
                 else if (menuItemId == R.id.menuReport){
                     FragmentReportLandlord rep = new FragmentReportLandlord();
                     getFragmentManager().beginTransaction().replace(R.id.frame, rep).commit();
 
                     AttachDAL attachDAL = new AttachDAL();
-                    attachDAL.createReportTenantLayout(FirebaseAuth.getInstance().getCurrentUser().getEmail(), getFragmentManager());
+                    attachDAL.createReportTenantLayout(UserProfile.getUserEmail(), getFragmentManager());
                 }
             }
         });

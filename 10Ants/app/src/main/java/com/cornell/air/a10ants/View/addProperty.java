@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.cornell.air.a10ants.DAL.PropertyDAL;
 import com.cornell.air.a10ants.Model.Property;
+import com.cornell.air.a10ants.Model.UserProfile;
 import com.cornell.air.a10ants.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -67,7 +68,7 @@ public class addProperty extends AppCompatActivity{
         property.setAddress(((EditText)findViewById(R.id.etAddress)).getText().toString());
         property.setDescription(((EditText)findViewById(R.id.etDescription)).getText().toString());
         property.setType(((Spinner)findViewById(R.id.spType)).getSelectedItem().toString());
-        property.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        property.setEmail(UserProfile.getUserEmail());
 
         //Create the instance of the DAO object
         propertyDAL = new PropertyDAL();

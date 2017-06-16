@@ -34,8 +34,7 @@ public class FragmentChatLandlord extends Fragment{
         View view = inflater.inflate(R.layout.main_chat_landlord, container, false);
 
         //Get user email data
-        if(FirebaseAuth.getInstance().getCurrentUser() != null)
-            email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        email = UserProfile.getUserEmail();
 
         //Find control
         databaseProperty = FirebaseDatabase.getInstance().getReference("properties");
@@ -72,6 +71,6 @@ public class FragmentChatLandlord extends Fragment{
         propertyDAL = new PropertyDAL(getActivity(), lvChat, listProperty);
 
         //Fill the listview
-        propertyDAL.listProperty(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        propertyDAL.listProperty(UserProfile.getUserEmail());
     }
 }
